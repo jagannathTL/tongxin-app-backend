@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShtxSms2008Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ShtxSms2008Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="CustomerBases" EntityType="ShtxSms2008Model.CustomerBase" />
+    <EntitySet Name="CustomerExtend" EntityType="ShtxSms2008Model.CustomerExtend" />
+    <EntitySet Name="Markets" EntityType="ShtxSms2008Model.Market" />
+    <EntitySet Name="XHMarketGroups" EntityType="ShtxSms2008Model.XHMarketGroup" />
+    <EntitySet Name="weixin_user" EntityType="ShtxSms2008Model.weixin_user" />
+    <EntitySet Name="Gps" EntityType="ShtxSms2008Model.Gp" />
+    <EntitySet Name="Prices" EntityType="ShtxSms2008Model.Price" />
+    <EntitySet Name="SmsProducts" EntityType="ShtxSms2008Model.SmsProduct" />
+    <AssociationSet Name="FK_Gps_Market" Association="ShtxSms2008Model.FK_Gps_Market">
+      <End Role="Market" EntitySet="Markets" />
+      <End Role="Gp" EntitySet="Gps" />
+    </AssociationSet>
+    <EntitySet Name="Weixin_Pinglun" EntityType="ShtxSms2008Model.Weixin_Pinglun" />
+    <EntitySet Name="AppCustomerTokens" EntityType="ShtxSms2008Model.AppCustomerToken" />
+    <EntitySet Name="CataLogs" EntityType="ShtxSms2008Model.CataLog" />
+    <EntitySet Name="Channels" EntityType="ShtxSms2008Model.Channel" />
+    <AssociationSet Name="FK_CataLog_Channel" Association="ShtxSms2008Model.FK_CataLog_Channel">
+      <End Role="Channel" EntitySet="Channels" />
+      <End Role="CataLog" EntitySet="CataLogs" />
+    </AssociationSet>
+    <EntitySet Name="Images" EntityType="ShtxSms2008Model.Image" />
+    <EntitySet Name="Provinces" EntityType="ShtxSms2008Model.Province" />
+    <EntitySet Name="Supplies" EntityType="ShtxSms2008Model.Supply" />
+    <AssociationSet Name="FK_Supply_Province" Association="ShtxSms2008Model.FK_Supply_Province">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="Supply" EntitySet="Supplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_Supply" Association="ShtxSms2008Model.FK_Image_Supply">
+      <End Role="Supply" EntitySet="Supplies" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <EntitySet Name="App_user" EntityType="ShtxSms2008Model.App_user" />
+    <EntitySet Name="SmsRoles" EntityType="ShtxSms2008Model.SmsRole" />
+    <EntitySet Name="ApkDownloads" EntityType="ShtxSms2008Model.ApkDownload" />
+    <EntitySet Name="MyAppGroups" EntityType="ShtxSms2008Model.MyAppGroup" />
+    <AssociationSet Name="FK_MyAppGroup_XHMarketGroup" Association="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup">
+      <End Role="XHMarketGroup" EntitySet="XHMarketGroups" />
+      <End Role="MyAppGroup" EntitySet="MyAppGroups" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CustomerBase">
+    <Key>
+      <PropertyRef Name="Tel" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Tel" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="Name" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="Address" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="PostNumber" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Fax" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="SendInterFace" Type="Byte" />
+    <Property Name="Bak" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="WasteBook" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="BargainID" Type="Int32" />
+    <Property Name="Province" Type="Int32" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="SendintFlag" Type="Boolean" />
+    <Property Name="FetionFriendStatus" Type="Int32" />
+    <Property Name="Appsecret" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="FetionUID" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FetionCardId" Type="Int32" />
+    <Property Name="ProductLine" Type="Int32" />
+    <Property Name="FetionBuddyCount" Type="Int32" Nullable="false" />
+    <Property Name="FetionFriendDate" Type="DateTime" Precision="0" />
+    <Property Name="WeixinId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="MobileProvince" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="MobileCity" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+    <Property Name="Salt" Type="Int32" />
+    <Property Type="DateTime" Name="Birthday" Precision="0" />
+  </EntityType>
+  <EntityType Name="CustomerExtend">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Tel" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FirstDate" Precision="3" />
+    <Property Type="DateTime" Name="EndDate" Precision="3" />
+    <Property Type="DateTime" Name="UpdateDate" Precision="3" />
+    <Property Type="Boolean" Name="IsPayment" />
+    <Property Type="Double" Name="CusTerm" />
+    <Property Type="Decimal" Name="UnitPrice" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="TotalCon" Precision="19" Scale="4" />
+    <Property Type="Byte" Name="CusKind" Nullable="false" />
+    <Property Type="Boolean" Name="Valid" />
+    <Property Type="String" Name="Mid" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Byte" Name="Defer" />
+    <Property Type="Byte" Name="SendInterFace" />
+    <Property Type="String" Name="Bak" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="WasteBook" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="BargainID" />
+    <Property Type="Int32" Name="RoleID" />
+    <Property Type="Byte" Name="EnFlag" />
+    <Property Type="Byte" Name="CusSendAttribute" />
+    <Property Type="Byte" Name="SendRank" />
+    <Property Type="Binary" Name="NewVersion" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="Guid" Name="ExtendID" />
+  </EntityType>
+  <EntityType Name="Market">
+    <Key>
+      <PropertyRef Name="MarketId" />
+    </Key>
+    <Property Type="Int32" Name="MarketId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="MarketName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="MarketType" />
+    <Property Type="Byte" Name="FlatType" />
+    <Property Type="Int32" Name="DisplayOrder" />
+    <Property Type="Int32" Name="GroupID" />
+    <Property Type="String" Name="SMName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Gps" Relationship="ShtxSms2008Model.FK_Gps_Market" FromRole="Market" ToRole="Gp" />
+  </EntityType>
+  <EntityType Name="XHMarketGroup">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Type="Int32" Name="GroupID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="GroupName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AddDate" Precision="3" />
+    <Property Type="Int32" Name="Flag" />
+    <Property Type="Boolean" Name="IsForApp" Nullable="false" />
+    <Property Type="Boolean" Name="IsDefault" />
+    <NavigationProperty Name="MyAppGroups" Relationship="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup" FromRole="XHMarketGroup" ToRole="MyAppGroup" />
+  </EntityType>
+  <EntityType Name="weixin_user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="OpenId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="SubDate" Nullable="false" Precision="0" />
+    <Property Type="Int32" Name="Type" Nullable="false" />
+    <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="BindDate" Precision="0" />
+  </EntityType>
+  <EntityType Name="Gp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Tel" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="RoleID" />
+    <Property Type="Int32" Name="MarketID" />
+    <Property Type="Int32" Name="ProductID" />
+    <Property Type="Int32" Name="ProductNum" />
+    <Property Type="Decimal" Name="ProductSum" Precision="38" Scale="0" />
+    <Property Type="Int32" Name="ProductKind" />
+    <Property Type="String" Name="SendTime" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Market" Relationship="ShtxSms2008Model.FK_Gps_Market" FromRole="Gp" ToRole="Market" />
+  </EntityType>
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="PriceID" />
+    </Key>
+    <Property Type="Int32" Name="PriceID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MarketID" />
+    <Property Type="Int32" Name="ProductID" />
+    <Property Type="String" Name="LPrice" MaxLength="53" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="HPrice" MaxLength="53" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="APrice" MaxLength="53" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AddDate" Precision="3" />
+    <Property Type="String" Name="Water" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NewPrice" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Storehouse" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StrikeBargain" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Stock" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SpecialL" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SpecialH" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PriceChange" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SmsProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Type="Int32" Name="ProductId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MarketId" />
+    <Property Type="String" Name="ProductName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ProductNum" />
+    <Property Type="Decimal" Name="ProductSum" Precision="29" Scale="0" />
+    <Property Type="String" Name="Format" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Byte" Name="ProductKind" />
+    <Property Type="Int32" Name="DisplayOrder" />
+    <Property Type="Int32" Name="AttributeID" />
+    <Property Type="Boolean" Name="IsShow" />
+    <Property Type="Byte" Name="XianFlag" />
+    <Property Type="Int32" Name="Area" />
+    <Property Type="Byte" Name="IsXH" />
+    <Property Type="String" Name="SName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TaxIncluded" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsWeixinVisible" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Gps_Market">
+    <End Type="ShtxSms2008Model.Market" Role="Market" Multiplicity="0..1" />
+    <End Type="ShtxSms2008Model.Gp" Role="Gp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Market">
+        <PropertyRef Name="MarketId" />
+      </Principal>
+      <Dependent Role="Gp">
+        <PropertyRef Name="MarketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Weixin_Pinglun">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="productId" Nullable="false" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="date" Nullable="false" Precision="0" />
+    <Property Type="DateTime" Name="create" Precision="3" />
+    <Property Type="String" Name="mid" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="icon" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AppCustomerToken">
+    <Key>
+      <PropertyRef Name="tel" />
+    </Key>
+    <Property Type="String" Name="tel" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="devicetoken" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="salt" />
+    <Property Type="DateTime" Name="updatedate" Precision="3" />
+    <Property Type="Boolean" Name="isSound" />
+    <Property Type="Int32" Name="PhoneType" />
+    <Property Type="Int32" Name="PrePhoneType" />
+  </EntityType>
+  <EntityType Name="CataLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="KeyName" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ChannelId" Nullable="false" />
+    <NavigationProperty Name="Channel" Relationship="ShtxSms2008Model.FK_CataLog_Channel" FromRole="CataLog" ToRole="Channel" />
+  </EntityType>
+  <EntityType Name="Channel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CataLogs" Relationship="ShtxSms2008Model.FK_CataLog_Channel" FromRole="Channel" ToRole="CataLog" />
+  </EntityType>
+  <Association Name="FK_CataLog_Channel">
+    <End Type="ShtxSms2008Model.Channel" Role="Channel" Multiplicity="1" />
+    <End Type="ShtxSms2008Model.CataLog" Role="CataLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Channel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CataLog">
+        <PropertyRef Name="ChannelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="SupplyID" Nullable="false" />
+    <NavigationProperty Name="Supply" Relationship="ShtxSms2008Model.FK_Image_Supply" FromRole="Image" ToRole="Supply" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ParentID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Supplies" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Province" ToRole="Supply" />
+  </EntityType>
+  <EntityType Name="Supply">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Boolean" Name="SupplyType" Nullable="false" />
+    <Property Type="Int32" Name="CatalogID" Nullable="false" />
+    <Property Type="String" Name="Product" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Quantity" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Mobile" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Contact" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="DeliveryType" Nullable="false" />
+    <Property Type="Int32" Name="ProviceID" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Province" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Supply" ToRole="Province" />
+    <NavigationProperty Name="Images" Relationship="ShtxSms2008Model.FK_Image_Supply" FromRole="Supply" ToRole="Image" />
+    <Property Name="isChecked" Type="Boolean" />
+    <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Price" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Supply_Province">
+    <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="1" />
+    <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="ProviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_Supply">
+    <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="1" />
+    <End Type="ShtxSms2008Model.Image" Role="Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supply">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="SupplyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="App_user">
+    <Key>
+      <PropertyRef Name="Tel" />
+    </Key>
+    <Property Type="String" Name="Tel" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="applyCount" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SmsRole">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Type="Int32" Name="RoleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="RoleName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RoleDesc" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="Byte" Name="RoleType" />
+    <Property Type="String" Name="Colligate" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ApkDownload">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="downloadtime" Precision="3" />
+  </EntityType>
+  <EntityType Name="MyAppGroup">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="GroupID" Nullable="false" />
+    <Property Type="String" Name="tel" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="DisplayOrder" />
+    <NavigationProperty Name="XHMarketGroup" Relationship="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup" FromRole="MyAppGroup" ToRole="XHMarketGroup" />
+    <Property Type="Int32" Name="Flag" />
+  </EntityType>
+  <Association Name="FK_MyAppGroup_XHMarketGroup">
+    <End Type="ShtxSms2008Model.XHMarketGroup" Role="XHMarketGroup" Multiplicity="1" />
+    <End Type="ShtxSms2008Model.MyAppGroup" Role="MyAppGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="XHMarketGroup">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="MyAppGroup">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

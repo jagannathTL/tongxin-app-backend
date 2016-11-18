@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MetalSmsSendModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MetalSmsSendEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Weixin_Log" EntityType="MetalSmsSendModel.Weixin_Log" />
+    <EntitySet Name="App_Log" EntityType="MetalSmsSendModel.App_Log" />
+    <EntitySet Name="ProvideSms" EntityType="MetalSmsSendModel.ProvideSm" />
+    <EntitySet Name="app_sms" EntityType="MetalSmsSendModel.app_sms" />
+  </EntityContainer>
+  <EntityType Name="Weixin_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ErrCode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ErrMsg" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Msg" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="To" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="App_Log">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="mobile" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ErrCode" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ErrMsg" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="Date" Precision="3" Nullable="false" />
+    <Property Type="String" Name="Msg" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Mid" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SMSTitle" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="scanCount" />
+    <Property Type="String" Name="Url" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProvideSm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Tel" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Message" MaxLength="600" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AddDate" Precision="3" />
+    <Property Type="Byte" Name="SendInt" />
+    <Property Type="String" Name="Mid" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SMSTitle" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Byte" Name="Recheck" />
+    <Property Type="Int32" Name="UseFlag" />
+    <Property Type="Byte" Name="SendRank" />
+    <Property Type="Int32" Name="Send_Num" />
+    <Property Type="Boolean" Name="st" />
+    <Property Type="Boolean" Name="Stop_Flag" />
+  </EntityType>
+  <EntityType Name="app_sms">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="mobile" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="content" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="timestamp" Precision="3" />
+    <Property Type="String" Name="Mid" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SMSTitle" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="scanCount" Nullable="false" />
+    <Property Type="Boolean" Name="st" />
+    <Property Type="String" Name="Url" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

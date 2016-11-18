@@ -1,0 +1,12 @@
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\Service.dll.config
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\Service.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\Service.pdb
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\EntityFramework.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\EntityFramework.SqlServer.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\Model.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\Model.pdb
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\EntityFramework.xml
+D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\EntityFramework.SqlServer.xml
+D:\myP4\DEV\SourceCode\tongxin_news\Service\obj\Release\Service.csprojResolveAssemblyReference.cache
+D:\myP4\DEV\SourceCode\tongxin_news\Service\obj\Release\Service.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Service\obj\Release\Service.pdb

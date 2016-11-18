@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MetalSmsSendModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MetalSmsSendModelStoreContainer">
+    <EntitySet Name="App_Log" EntityType="MetalSmsSendModel.Store.App_Log" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="app_sms" EntityType="MetalSmsSendModel.Store.app_sms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProvideSms" EntityType="MetalSmsSendModel.Store.ProvideSms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Weixin_Log" EntityType="MetalSmsSendModel.Store.Weixin_Log" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="App_Log">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="mobile" Type="varchar" MaxLength="20" />
+    <Property Name="ErrCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="ErrMsg" Type="ntext" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Msg" Type="ntext" />
+    <Property Name="Mid" Type="varchar" MaxLength="50" />
+    <Property Name="SMSTitle" Type="varchar" MaxLength="30" />
+    <Property Name="scanCount" Type="int" />
+    <Property Name="Url" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="app_sms">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="mobile" Type="varchar" MaxLength="20" />
+    <Property Name="content" Type="nvarchar(max)" />
+    <Property Name="timestamp" Type="datetime" />
+    <Property Name="Mid" Type="varchar" MaxLength="50" />
+    <Property Name="SMSTitle" Type="varchar" MaxLength="30" />
+    <Property Name="scanCount" Type="int" Nullable="false" />
+    <Property Name="st" Type="bit" />
+    <Property Name="Url" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ProvideSms">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Tel" Type="varchar" MaxLength="1000" />
+    <Property Name="Message" Type="varchar" MaxLength="600" />
+    <Property Name="AddDate" Type="datetime" />
+    <Property Name="SendInt" Type="tinyint" />
+    <Property Name="Mid" Type="varchar" MaxLength="50" />
+    <Property Name="SMSTitle" Type="varchar" MaxLength="30" />
+    <Property Name="Recheck" Type="tinyint" />
+    <Property Name="UseFlag" Type="int" />
+    <Property Name="SendRank" Type="tinyint" />
+    <Property Name="Send_Num" Type="int" />
+    <Property Name="st" Type="bit" />
+    <Property Name="Stop_Flag" Type="bit" />
+  </EntityType>
+  <EntityType Name="Weixin_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ErrCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="ErrMsg" Type="ntext" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Msg" Type="ntext" />
+    <Property Name="To" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+</Schema>

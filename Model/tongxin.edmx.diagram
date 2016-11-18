@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5b0a824817a245c596e7b6a30cfacab8" Name="关系图1">
+        <EntityTypeShape EntityType="ShtxSms2008Model.CustomerBase" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.CustomerExtend" Width="1.5" PointX="3.918298078662855" PointY="1.3851777768624842" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Market" Width="1.5" PointX="7.75" PointY="2.125" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.XHMarketGroup" Width="1.5" PointX="6" PointY="2.75" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.weixin_user" Width="1.5" PointX="10" PointY="2.625" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Gp" Width="1.5" PointX="8.5" PointY="6.5" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Price" Width="1.5" PointX="10.875" PointY="6.5" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.SmsProduct" Width="1.5" PointX="6.125" PointY="6.75" />
+        <AssociationConnector Association="ShtxSms2008Model.FK_Gps_Market" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Weixin_Pinglun" Width="1.5" PointX="2.5" PointY="7.25" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.AppCustomerToken" Width="1.5" PointX="4.25" PointY="7.625" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.CataLog" Width="1.5" PointX="0.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Channel" Width="1.5" PointX="3.5" PointY="10.25" />
+        <AssociationConnector Association="ShtxSms2008Model.FK_CataLog_Channel" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Image" Width="1.5" PointX="5.375" PointY="12.125" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Province" Width="1.5" PointX="3.375" PointY="12.25" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Supply" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <AssociationConnector Association="ShtxSms2008Model.FK_Supply_Province" />
+        <AssociationConnector Association="ShtxSms2008Model.FK_Image_Supply" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.App_user" Width="1.5" PointX="8.5" PointY="9.75" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.SmsRole" Width="1.5" PointX="11" PointY="10.875" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.ApkDownload" Width="1.5" PointX="7.875" PointY="13.75" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.MyAppGroup" Width="1.5" PointX="8.5" PointY="11.625" />
+        <AssociationConnector Association="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

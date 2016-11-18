@@ -1,0 +1,9 @@
+D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\Model.dll.config
+D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\Model.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\Model.pdb
+D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\EntityFramework.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\EntityFramework.xml
+D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\myP4\DEV\SourceCode\tongxin_news\Model\obj\Debug\Model.dll
+D:\myP4\DEV\SourceCode\tongxin_news\Model\obj\Debug\Model.pdb

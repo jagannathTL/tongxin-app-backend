@@ -1,0 +1,13 @@
+SCC = This is a source code control file
+
+[Model.csproj]
+SCC_Aux_Path = "P4SCC#172.20.67.133:1666##biao.lv##MyP4"
+SCC_Project_Name = Perforce Project
+
+[Service.csproj]
+SCC_Aux_Path = "P4SCC#172.20.67.133:1666##biao.lv##MyP4"
+SCC_Project_Name = Perforce Project
+
+[tongxin_news.sln]
+SCC_Aux_Path = "P4SCC#172.20.67.133:1666##biao.lv##MyP4"
+SCC_Project_Name = Perforce Project

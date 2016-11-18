@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b24aec77c64e4aa68f162602cdcc9b93" Name="关系图1">
+        <EntityTypeShape EntityType="MetalSmsSendModel.Weixin_Log" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MetalSmsSendModel.App_Log" Width="1.5" PointX="2.875" PointY="0.75" />
+        <EntityTypeShape EntityType="MetalSmsSendModel.ProvideSm" Width="1.5" PointX="5.625" PointY="1.375" />
+        <EntityTypeShape EntityType="MetalSmsSendModel.app_sms" Width="1.5" PointX="4.7649634837941095" PointY="29.7521867741608" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

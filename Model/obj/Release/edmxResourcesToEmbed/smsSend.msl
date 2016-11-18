@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MetalSmsSendModelStoreContainer" CdmEntityContainer="MetalSmsSendEntities">
+    <EntitySetMapping Name="Weixin_Log">
+      <EntityTypeMapping TypeName="MetalSmsSendModel.Weixin_Log">
+        <MappingFragment StoreEntitySet="Weixin_Log">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ErrCode" ColumnName="ErrCode" />
+          <ScalarProperty Name="ErrMsg" ColumnName="ErrMsg" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Msg" ColumnName="Msg" />
+          <ScalarProperty Name="To" ColumnName="To" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="App_Log">
+      <EntityTypeMapping TypeName="MetalSmsSendModel.App_Log">
+        <MappingFragment StoreEntitySet="App_Log">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="scanCount" ColumnName="scanCount" />
+          <ScalarProperty Name="SMSTitle" ColumnName="SMSTitle" />
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="Msg" ColumnName="Msg" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ErrMsg" ColumnName="ErrMsg" />
+          <ScalarProperty Name="ErrCode" ColumnName="ErrCode" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProvideSms">
+      <EntityTypeMapping TypeName="MetalSmsSendModel.ProvideSm">
+        <MappingFragment StoreEntitySet="ProvideSms">
+          <ScalarProperty Name="Stop_Flag" ColumnName="Stop_Flag" />
+          <ScalarProperty Name="st" ColumnName="st" />
+          <ScalarProperty Name="Send_Num" ColumnName="Send_Num" />
+          <ScalarProperty Name="SendRank" ColumnName="SendRank" />
+          <ScalarProperty Name="UseFlag" ColumnName="UseFlag" />
+          <ScalarProperty Name="Recheck" ColumnName="Recheck" />
+          <ScalarProperty Name="SMSTitle" ColumnName="SMSTitle" />
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="SendInt" ColumnName="SendInt" />
+          <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="app_sms">
+      <EntityTypeMapping TypeName="MetalSmsSendModel.app_sms">
+        <MappingFragment StoreEntitySet="app_sms">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="st" ColumnName="st" />
+          <ScalarProperty Name="scanCount" ColumnName="scanCount" />
+          <ScalarProperty Name="SMSTitle" ColumnName="SMSTitle" />
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
