@@ -1,4 +1,4 @@
-﻿<%@ WebHandler Language="C#" Class="PriceHandler" %>
+<%@ WebHandler Language="C#" Class="PriceHandler" %>
 
 using System;
 using System.Web;
@@ -76,6 +76,12 @@ public class PriceHandler : IHttpHandler
                 writer.WriteValue(list[i].Change);
                 writer.WritePropertyName("isOrder");
                 writer.WriteValue(list[i].IsOrder);
+                writer.WritePropertyName("ParentName");
+                writer.WriteValue(list[i].ParentName);
+                writer.WritePropertyName("Spec");
+                writer.WriteValue(list[i].Spec);
+                writer.WritePropertyName("Comment");
+                writer.WriteValue(list[i].Comment);
                 writer.WriteEndObject();
             }
             writer.WriteEndArray();

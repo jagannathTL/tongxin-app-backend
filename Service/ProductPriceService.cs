@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,7 +34,10 @@ namespace Service
                         var vm = new ProductPriceVM
                         {
                             ProductId = product.ProductId,
-                            ProductName = product.ProductName
+                            ProductName = product.ProductName,
+                            ParentName = product.parentName,
+                            Comment = product.comment,
+                            Spec = product.spec
                         };
                         if (orderIds.Contains(product.ProductId))
                         {
@@ -76,7 +79,10 @@ namespace Service
                         var vm = new ProductPriceVM
                         {
                             ProductId = product.ProductId,
-                            ProductName = product.ProductName
+                            ProductName = product.ProductName,
+                            ParentName = product.parentName,
+                            Comment = product.comment,
+                            Spec = product.spec
                         };
                         if (orderIds.Contains(product.ProductId))
                         {

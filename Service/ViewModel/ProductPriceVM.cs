@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +16,8 @@ namespace Service.ViewModel
         public string Change { get; set; }
         public string IsOrder { get; set; }
         public DateTime AddDate { get; set; }
+        public string ParentName { get; set; }
+        public string Spec { get; set; }
+        public string Comment { get; set; }
     }
 }
