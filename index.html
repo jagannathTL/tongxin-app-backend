@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>同鑫资讯</title>
+    <link href="swiper/css/swiper.min.css" rel="stylesheet" />
+    <link href="swiper/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 微软雅黑;
+        }
+
+        hr {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .swiper-container {
+            width: 350px;
+            height: 300px;
+        }
+
+    </style>
+    <script src="scripts/adaptUI.js"></script>
+
+    <script>
+        adaptUILayout.adapt(480);
+    </script>
+    <script src="swiper/js/swiper.min.js"></script>
+    <script src="scripts/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function () {
+            $("#downloadBtn").click(function () {
+                $.post("Handlers/DownloadCountHandler.ashx", { method: "addCount" });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="background: #18b4ed; height: 50px; font-size: 22px; color: white; text-align: center; padding-top: 10px;">版本更新</div>
+
+    <div id="header" style="height: 70px;">
+        <div id="img" style="width: 70px; height: 70px; float: left;">
+            <img style="width: 90px; height: 90px;" src="images/applogo.png" />
+        </div>
+        <div style="width: 180px; height: 70px; float: left; margin-top: 10px; margin-left: 10px;">
+            <div style="margin-top: 10px; font-size: 18px; font-weight: bold;">同鑫资讯</div>
+            <div style="margin-top: 5px; color: #808080">版本号:1.3</div>
+        </div>
+
+        <div style="width: 80px; height: 70px; float: right; margin-top: 25px;">
+            <a class="btn btn-default" href="同鑫资讯.apk" role="button" id="downloadBtn">下载</a>
+        </div>
+    </div>
+
+
+    <div id="content">
+
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="images/行情报价.png" style="width:165px;"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/实时资讯.png" style="width:165px;"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/资讯评论.png" style="width:165px;"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/商圈频道.png" style="width:165px;"/>
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/期货行情.png" style="width:165px;"/>
+                </div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+            <!-- 如果需要滚动条 -->
+            <!--<div class="swiper-scrollbar"></div>-->
+        </div>
+
+    </div>
+    <hr />
+    <p style="text-indent: 2em; font-size: 18px; padding-left: 20px; padding-right: 20px;">同鑫资讯是国内领先的大宗商品综合资讯与现货交易服务商。同鑫长期专注于大宗商品的调查研究，致力为客户提供最全面、最专业的信息资讯服务。</p>
+    <hr />
+    <div style="font-weight: bold; font-size: 20px; padding-left: 20px; padding-right: 20px;">新版特性</div>
+    <p style="color: #808080; padding-left: 20px; padding-right: 20px;">
+        1.方便快捷：随时随地查阅行情资讯、分析评论；<br />
+        2.内容丰富：所有现货行情并可查阅历史数据、图表，图文并茂；
+    </p>
+    <div style="text-align: center; margin-bottom: 20px;">24小时客服电话：4008720588</div>
+
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            direction: 'horizontal',
+            loop: true,
+            autoplay: 5000,
+            // 如果需要分页器
+            pagination: '.swiper-pagination',
+
+            // 如果需要滚动条
+            //scrollbar: '.swiper-scrollbar',
+            slidesPerView: 2,
+            spaceBetween: 20
+        })
+    </script>
+</body>
+</html>
