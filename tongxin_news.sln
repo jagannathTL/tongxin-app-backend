@@ -1,18 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{347EE15F-E5FC-4EEE-BEDD-26DD5B67309F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{D9EB2396-4C58-46E2-B5F0-3F8D488DA8F8}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Back", "http://localhost:3838", "{52C2CBD4-1D96-4F20-9DFA-FA1E4A1427B9}"
 	ProjectSection(WebsiteProperties) = preProject
-		SccProjectName = "Perforce Project"
+		SccProjectName = ""
 		SccAuxPath = ""
-		SccLocalPath = "."
-		SccProvider = "MSSCCI:Perforce SCM"
+		SccLocalPath = ""
+		SccProvider = ""
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		ProjectReferences = "{d9eb2396-4c58-46e2-b5f0-3f8d488da8f8}|Service.dll;{347EE15F-E5FC-4EEE-BEDD-26DD5B67309F}|Model.dll;"
@@ -42,20 +40,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{70158F
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 4
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Model\\Model.csproj
-		SccLocalPath1 = .
-		SccProjectFilePathRelativizedFromConnection1 = Model\\
-		SccProjectUniqueName2 = Service\\Service.csproj
-		SccLocalPath2 = .
-		SccProjectFilePathRelativizedFromConnection2 = Service\\
-		SccWebProject3 = true
-		SccProjectUniqueName3 = http://localhost:3838
-		SccLocalPath3 = d:\\p4\\biao.lv_lb-PC\\DEV\\SourceCode\\tongxin_news\\Back
-		SccProjectEnlistmentChoice3 = 2
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

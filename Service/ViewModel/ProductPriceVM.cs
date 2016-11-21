@@ -9,6 +9,7 @@ namespace Service.ViewModel
     public class ProductPriceVM
     {
         public int ProductId { get; set; }
+        public int MarketID { get; set; }
         public string ProductName { get; set; }
         public string Date { get; set; }
         public string LPrice { get; set; }
@@ -20,4 +21,6 @@ namespace Service.ViewModel
         public string Spec { get; set; }
         public string Comment { get; set; }
     }
+
+
 }

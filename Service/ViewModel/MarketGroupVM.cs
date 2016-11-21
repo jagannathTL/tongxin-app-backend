@@ -14,4 +14,5 @@ namespace Service.ViewModel
         public List<MarketVM> Market { get; set; }
 
     }
+    
 }

@@ -193,6 +193,9 @@
     <Property Type="String" Name="SName" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="TaxIncluded" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="Boolean" Name="IsWeixinVisible" Nullable="false" />
+    <Property Type="String" Name="spec" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="parentName" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Gps_Market">
     <End Type="ShtxSms2008Model.Market" Role="Market" Multiplicity="0..1" />

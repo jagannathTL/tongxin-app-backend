@@ -140,6 +140,9 @@
     <EntitySetMapping Name="SmsProducts">
       <EntityTypeMapping TypeName="ShtxSms2008Model.SmsProduct">
         <MappingFragment StoreEntitySet="SmsProduct">
+          <ScalarProperty Name="parentName" ColumnName="parentName" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="spec" ColumnName="spec" />
           <ScalarProperty Name="IsWeixinVisible" ColumnName="IsWeixinVisible" />
           <ScalarProperty Name="TaxIncluded" ColumnName="TaxIncluded" />
           <ScalarProperty Name="SName" ColumnName="SName" />

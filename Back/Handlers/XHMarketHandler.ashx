@@ -18,9 +18,35 @@ public class XHMarketHandler : IHttpHandler {
         if (method == "getmarkets")
         {
             var mobile = context.Request["mobile"] ?? "";
-            
+
+            var priceSvc = new ProductPriceService();
             var marketSvc = new MarketService();
+
+            var priceDic = priceSvc.GetAllMarketLastPrice();
+            
             var list = marketSvc.GetMarkets(mobile, (int)Model.enums.EnumMarketFlag.XHMarket);
+
+            foreach (var tGroup in list)
+            {
+              if (tGroup.Market != null ) //.inBucket == "false")
+              {//1
+              foreach ( var tMarket in tGroup.Market )
+              {//for
+              if ( priceDic.ContainsKey(tMarket.Id) )
+              {
+                  if (tMarket.NewPrices == null)
+                  {
+                      tMarket.NewPrices = new List<ProductPriceVM>();
+                  }
+                var newPrice = new ProductPriceVM();
+                newPrice = priceDic[tMarket.Id];
+                tMarket.NewPrices.Add(newPrice);
+                //Console.WriteLine(priceDic[tMarket.Id]);
+              }
+              }//for
+              }//1
+            }
+            
             var str = GetJson(list);
             context.Response.Write(str);
             context.Response.Flush();
@@ -60,6 +86,25 @@ public class XHMarketHandler : IHttpHandler {
                     writer.WriteValue(list[i].Market[j].Id);
                     writer.WritePropertyName("name");
                     writer.WriteValue(list[i].Market[j].Name);
+                    
+
+                    if ( list[i].Market[j].NewPrices != null )
+                    for (int k = 0; k < list[i].Market[j].NewPrices.Count; k++)
+                    {
+                        writer.WritePropertyName("ProductId");
+                        writer.WriteValue(list[i].Market[j].NewPrices[k].ProductId);
+                        writer.WritePropertyName("ProductName");
+                        writer.WriteValue(list[i].Market[j].NewPrices[k].ProductName);
+                        writer.WritePropertyName("LPrice");
+                        writer.WriteValue(list[i].Market[j].NewPrices[k].LPrice);
+                        writer.WritePropertyName("HPrice");
+                        writer.WriteValue(list[i].Market[j].NewPrices[k].HPrice);
+                        writer.WritePropertyName("Date");
+                        writer.WriteValue(list[i].Market[j].NewPrices[k].AddDate.ToString());
+                        writer.WritePropertyName("Change");
+                        writer.WriteValue(list[i].Market[j].NewPrices[k].Change);
+                    }
+
                     writer.WriteEndObject();
                 }
                 writer.WriteEndArray();

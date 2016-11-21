@@ -63,6 +63,61 @@ namespace Service
             }
         }
 
+        //获得所有现货商品最近更新价格信息
+        //public List<ProductPriceVM> GetAllMarketLastPrice()
+        public Dictionary<int, ProductPriceVM> GetAllMarketLastPrice()
+        {
+            //var listOrder = new List<ProductPriceVM>();
+            var listDic = new Dictionary<int, ProductPriceVM>();
+            using (var ctx = new ShtxSms2008Entities())
+            {//ctx
+                //inner join 
+                var listPrice = from f in
+                    (from p in ctx.Prices
+                        where !ctx.Prices.Any(es => (es.MarketID == p.MarketID) && (es.ProductID == p.ProductID) && (es.AddDate > p.AddDate) )
+                        orderby p.AddDate descending
+                        select p)
+                join dist in ctx.SmsProducts on new { mid=(int)f.MarketID, pid=(int)f.ProductID } equals new { mid = (int)dist.MarketId, pid=dist.ProductId }
+                select new 
+                {
+                    dist.ProductName,
+                    dist.SName,
+                    f.ProductID,
+                    f.LPrice,
+                    f.HPrice,
+                    f.APrice,
+                    f.AddDate,
+                    f.PriceChange,
+                    f.MarketID
+                };
+
+                //IEnumerable<IGrouping<int?, ProductPriceVM>> grouplist = listPrice.ToList().GroupBy(c => c.MarketID);
+                //var g_Mapid = new Dictionary<int, int>();
+                foreach (var product in listPrice)
+                {
+                    if (!listDic.ContainsKey((int)product.MarketID))
+                    {
+                        var vm = new ProductPriceVM
+                        {
+                            ProductId = (int)product.ProductID,
+                            ProductName = product.ProductName,
+
+                        };
+                        vm.AddDate = (DateTime)product.AddDate;
+                        vm.LPrice = product.LPrice;
+                        vm.HPrice = product.HPrice;
+                        vm.Change = product.PriceChange;
+                        vm.MarketID = (int)product.MarketID;
+                        listDic.Add((int)product.MarketID,vm);
+                        //listOrder.Add(vm);
+                    }
+
+                }
+
+                return listDic;
+            }//ctx
+        }
+
         public List<ProductPriceVM> GetOrderPricesByMobileAndMarketId(string mobile, int marketId)
         {
             var listOrder = new List<ProductPriceVM>();

@@ -7,3 +7,12 @@ D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\EntityFramework.xml
 D:\myP4\DEV\SourceCode\tongxin_news\Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\myP4\DEV\SourceCode\tongxin_news\Model\obj\Debug\Model.dll
 D:\myP4\DEV\SourceCode\tongxin_news\Model\obj\Debug\Model.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\obj\Debug\Model.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\obj\Debug\Model.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\bin\Debug\Model.dll.config
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\bin\Debug\Model.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\bin\Debug\Model.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\bin\Debug\EntityFramework.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\bin\Debug\EntityFramework.xml
+D:\公司GitHub项目管理目录\tongxin-app-backend\Model\bin\Debug\EntityFramework.SqlServer.xml
