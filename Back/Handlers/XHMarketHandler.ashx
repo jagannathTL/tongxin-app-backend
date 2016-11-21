@@ -100,7 +100,7 @@ public class XHMarketHandler : IHttpHandler {
                         writer.WritePropertyName("HPrice");
                         writer.WriteValue(list[i].Market[j].NewPrices[k].HPrice);
                         writer.WritePropertyName("Date");
-                        writer.WriteValue(list[i].Market[j].NewPrices[k].AddDate.ToString());
+                        writer.WriteValue(list[i].Market[j].NewPrices[k].AddDate.ToString("yyyy-MM-dd"));
                         writer.WritePropertyName("Change");
                         writer.WriteValue(list[i].Market[j].NewPrices[k].Change);
                     }
