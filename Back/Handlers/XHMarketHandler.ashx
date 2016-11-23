@@ -7,7 +7,8 @@ using Service.ViewModel;
 using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Generic;
-
+using Model;
+using System.Linq;
 
 public class XHMarketHandler : IHttpHandler {
     
@@ -17,40 +18,49 @@ public class XHMarketHandler : IHttpHandler {
         //var mobile = context.Request["mobile"];
         if (method == "getmarkets")
         {
-            var mobile = context.Request["mobile"] ?? "";
+            using (var ctx = new ShtxSms2008Entities())
+            {//entities
+                var mobile = context.Request["mobile"] ?? "";
 
-            var priceSvc = new ProductPriceService();
-            var marketSvc = new MarketService();
+                var priceSvc = new ProductPriceService();
+                var marketSvc = new MarketService();
 
-            var priceDic = priceSvc.GetAllMarketLastPrice();
-            
-            var list = marketSvc.GetMarkets(mobile, (int)Model.enums.EnumMarketFlag.XHMarket);
+                var priceDic = priceSvc.GetAllMarketLastPrice();
 
-            foreach (var tGroup in list)
-            {
-              if (tGroup.Market != null ) //.inBucket == "false")
-              {//1
-              foreach ( var tMarket in tGroup.Market )
-              {//for
-              if ( priceDic.ContainsKey(tMarket.Id) )
-              {
-                  if (tMarket.NewPrices == null)
-                  {
-                      tMarket.NewPrices = new List<ProductPriceVM>();
-                  }
-                var newPrice = new ProductPriceVM();
-                newPrice = priceDic[tMarket.Id];
-                tMarket.NewPrices.Add(newPrice);
-                //Console.WriteLine(priceDic[tMarket.Id]);
-              }
-              }//for
-              }//1
-            }
-            
-            var str = GetJson(list);
-            context.Response.Write(str);
-            context.Response.Flush();
-            context.Response.End();
+                var list = marketSvc.GetMarkets(mobile, (int)Model.enums.EnumMarketFlag.XHMarket);
+
+                foreach (var tGroup in list)
+                {
+                    if (tGroup.Market != null) //.inBucket == "false")
+                    {//1
+                        /*if (tGroup.Name == "我的关注")
+                        {
+                            var orderIds = ctx.Gps.Where(o => o.Tel == mobile && o.SendTime == "").Select(o=>new { MarketID = o.MarketID, ProductID = o.ProductID }).OrderBy(o=>o.MarketID);
+                        }*/
+
+                        foreach (var tMarket in tGroup.Market)
+                        {//for
+
+                            if (priceDic.ContainsKey(tMarket.Id))
+                            {
+                                if (tMarket.NewPrices == null)
+                                {
+                                    tMarket.NewPrices = new List<ProductPriceVM>();
+                                }
+                                var newPrice = new ProductPriceVM();
+                                newPrice = priceDic[tMarket.Id];
+                                tMarket.NewPrices.Add(newPrice);
+                                //Console.WriteLine(priceDic[tMarket.Id]);
+                            }
+                        }//for
+                    }//1
+                }
+
+                var str = GetJson(list);
+                context.Response.Write(str);
+                context.Response.Flush();
+                context.Response.End();
+            }//entities
         }
         else if (method == "groupChannel")
         {
