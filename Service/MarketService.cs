@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Service.ViewModel;
+using Model.enums;
 
 namespace Service
 {
@@ -57,14 +58,43 @@ namespace Service
                         }
                     }
 
+                    
                     var marketIds = ctx.Gps.Where(o => o.Tel == mobile && xhmarketIds.Contains(o.MarketID.Value)).Select(o => o.MarketID.Value).Distinct().ToList();
 
-                    foreach (var marketId in marketIds)
+                    if (type == (int)EnumMarketFlag.WXMarket)
                     {
-                        MarketVM order = new MarketVM();
-                        order.Id = marketId;
-                        order.Name = xhMarkets[marketId];
-                        list.Add(order);
+                        var orderProducts = ctx.Gps.Where(o => o.Tel == mobile).Select(o => o.ProductID).Distinct().ToList();
+                        foreach (var marketId in marketIds)
+                        {
+                            MarketVM order = new MarketVM();
+                            order.Id = marketId;
+                            order.Name = xhMarkets[marketId];
+                            var hasProducts =ctx.SmsProducts.Where(o => o.MarketId == marketId && orderProducts.Contains(o.ProductId)).Select(o => o.ProductId).ToList();
+                            var pls = ctx.Weixin_Pinglun.OrderByDescending(o => o.create).Where(o => hasProducts.Contains(o.productId)).Take(3).ToList();
+                            List<OrderPLVM> orderPls = new List<OrderPLVM>();
+                            foreach (var pl in pls)
+                            {
+                                OrderPLVM vm = new OrderPLVM();
+                                vm.Id = pl.id;
+                                vm.Title = pl.title;
+                                vm.Date = pl.date.ToString("yyyy-MM-dd");
+                                vm.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?mobile=" + mobile + "&id=" + pl.id;
+                                orderPls.Add(vm);
+                            }
+                            order.OrderPL = orderPls;
+                            list.Add(order);
+                        }
+                    }
+                    else
+                    {
+
+                        foreach (var marketId in marketIds)
+                        {
+                            MarketVM order = new MarketVM();
+                            order.Id = marketId;
+                            order.Name = xhMarkets[marketId];
+                            list.Add(order);
+                        }
                     }
                 }
             }
@@ -93,6 +123,30 @@ namespace Service
                     var groupId = group.GroupID;
                     var vm = new MarketGroupVM() { Id = groupId, Name = group.GroupName };
                     var markets = ctx.Markets.Where(o => o.GroupID == groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
+
+                    //评论显示，显示三条最新的。
+                    if (flag == (int)EnumMarketFlag.WXMarket)
+                    {
+                        foreach (var market in markets)
+                        {
+                            var hasProducts = ctx.SmsProducts.Where(o => o.MarketId == market.Id).Select(o => o.ProductId).ToList();
+                            var pls = ctx.Weixin_Pinglun.OrderByDescending(o => o.create).Where(o => hasProducts.Contains(o.productId)).Take(3).ToList();
+                            List<OrderPLVM> orderPls = new List<OrderPLVM>();
+                            foreach (var pl in pls)
+                            {
+                                OrderPLVM orderPlVM = new OrderPLVM();
+                                orderPlVM.Id = pl.id;
+                                orderPlVM.Title = pl.title;
+                                orderPlVM.Date = pl.date.ToString("yyyy-MM-dd");
+                                orderPlVM.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?mobile=" + mobile + "&id=" + pl.id;
+                                orderPls.Add(orderPlVM);
+                            }
+                            market.OrderPL = orderPls;
+                        }
+                    }
+
+
+                    
                     vm.Market = markets;
                     vm.inBucket = "false";
                     if (string.IsNullOrWhiteSpace(mobile))

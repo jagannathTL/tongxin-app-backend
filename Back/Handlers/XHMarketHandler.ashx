@@ -26,6 +26,8 @@ public class XHMarketHandler : IHttpHandler {
                 var marketSvc = new MarketService();
 
                 var priceDic = priceSvc.GetAllMarketLastPrice();
+                
+                //var orderList = ctx.AppGetOrderMarketPrice(mobile);
 
                 var list = marketSvc.GetMarkets(mobile, (int)Model.enums.EnumMarketFlag.XHMarket);
 
@@ -33,11 +35,41 @@ public class XHMarketHandler : IHttpHandler {
                 {
                     if (tGroup.Market != null) //.inBucket == "false")
                     {//1
-                        /*if (tGroup.Name == "我的关注")
+                        if (tGroup.Name == "我的关注")
                         {
-                            var orderIds = ctx.Gps.Where(o => o.Tel == mobile && o.SendTime == "").Select(o=>new { MarketID = o.MarketID, ProductID = o.ProductID }).OrderBy(o=>o.MarketID);
-                        }*/
-
+                            var orderIds = ctx.Gps.Where(o => o.Tel == mobile && o.SendTime == "").Select(o=>o.ProductID).ToList();
+                            foreach (var tMarket in tGroup.Market)
+                            {
+                                var list1 = ctx.SmsProducts.Where(o => o.MarketId == tMarket.Id && orderIds.Contains(o.ProductId)).Select(o=>o.ProductId).ToList();
+                                var orderPrice = ctx.Prices.Where(o => list1.Contains(o.ProductID.Value)).OrderByDescending(o => o.AddDate).First();
+                                //.Select(o => new
+                                //{
+                                //    ProductID = o.ProductID,
+                                //    LPrice = o.LPrice,
+                                //    HPrice = o.HPrice,
+                                //    APrice = o.APrice,
+                                //    AddDate = o.AddDate,
+                                //    PriceChange = o.PriceChange,
+                                //    MarketID = o.MarketID.Value
+                                //});
+                                var orderProducts = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == orderPrice.ProductID);
+                                if (tMarket.NewPrices == null)
+                                {
+                                    tMarket.NewPrices = new List<ProductPriceVM>();
+                                }
+                                var newPrice = new ProductPriceVM();
+                                newPrice.AddDate = orderPrice.AddDate.Value;
+                                newPrice.Change = CommonService.ChangePrice(orderPrice.PriceChange);
+                                newPrice.Comment = orderProducts.comment;
+                                newPrice.HPrice = orderPrice.HPrice;
+                                newPrice.LPrice = orderPrice.LPrice;
+                                newPrice.ProductId = orderPrice.ProductID.Value;
+                                newPrice.ProductName = orderProducts.ProductName;
+         
+                                tMarket.NewPrices.Add(newPrice);
+                            }
+                        }
+                        else
                         foreach (var tMarket in tGroup.Market)
                         {//for
 

@@ -97,6 +97,28 @@ public class PLHandler : IHttpHandler
                     writer.WriteValue(list[i].Market[j].Id);
                     writer.WritePropertyName("name");
                     writer.WriteValue(list[i].Market[j].Name);
+                    if (list[i].Market[j].OrderPL!=null && list[i].Market[j].OrderPL.Count > 0)
+                    {
+                        writer.WritePropertyName("pinglun");
+                        writer.WriteStartArray();
+
+                        for (int k = 0; k < list[i].Market[j].OrderPL.Count; k++)
+                        {
+                            var orderPl = list[i].Market[j].OrderPL[k];
+                            writer.WriteStartObject();
+                            writer.WritePropertyName("id");
+                            writer.WriteValue(orderPl.Id);
+                            writer.WritePropertyName("title");
+                            writer.WriteValue(orderPl.Title);
+                            writer.WritePropertyName("date");
+                            writer.WriteValue(orderPl.Date);
+                            writer.WritePropertyName("url");
+                            writer.WriteValue(orderPl.Url);
+                            writer.WriteEndObject();
+                        }
+                        
+                        writer.WriteEndArray();
+                    }
                     writer.WriteEndObject();
                 }
                 writer.WriteEndArray();

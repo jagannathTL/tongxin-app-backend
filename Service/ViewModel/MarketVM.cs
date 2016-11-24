@@ -13,5 +13,13 @@ namespace Service.ViewModel
         public List<ProductPriceVM> NewPrices { get; set; }
 
         public int Order { get; set; }
+        public List<OrderPLVM> OrderPL { get; set; }
+    }
+    public class OrderPLVM
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Date { get; set; }
+        public string Url { get; set; }
     }
 }
