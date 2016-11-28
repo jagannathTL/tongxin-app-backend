@@ -10,3 +10,15 @@ D:\myP4\DEV\SourceCode\tongxin_news\Service\bin\Release\EntityFramework.SqlServe
 D:\myP4\DEV\SourceCode\tongxin_news\Service\obj\Release\Service.csprojResolveAssemblyReference.cache
 D:\myP4\DEV\SourceCode\tongxin_news\Service\obj\Release\Service.dll
 D:\myP4\DEV\SourceCode\tongxin_news\Service\obj\Release\Service.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\Service.dll.config
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\Service.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\Service.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\EntityFramework.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\EntityFramework.SqlServer.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\Model.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\Model.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\EntityFramework.xml
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\EntityFramework.SqlServer.xml
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\obj\Release\Service.csprojResolveAssemblyReference.cache
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\obj\Release\Service.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\obj\Release\Service.pdb

@@ -41,37 +41,39 @@ namespace Service
                     //DateTime start = now.AddDays(-6);
                     //DateTime end = now.AddDays(1);
                     var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).Select(o => o.ProductId).Distinct().ToList();
-                    var orders = ctx.Gps.Where(o => o.Tel == mobile).Select(o => o.ProductID).Distinct().ToList();
-                    //var pingluns = new List<AppPingLunVM>();
 
-                    foreach (var productId in products)
-                    {
-                        var product = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == productId);
-                        var productPingluns = ctx.Weixin_Pinglun.Where(o => o.productId == productId).OrderByDescending(o => o.create).Take(50).ToList();
-                        if (productPingluns.Count > 0)
+                    if (products.Count > 0)
+                    {//1
+                        var orders = ctx.Gps.Where(o => o.Tel == mobile).Select(o => o.ProductID).Distinct().ToList();
+                        
+                        foreach (var productId in products)
                         {
-                            foreach (var productPinglun in productPingluns)
+                            var product = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == productId);
+                            var productPingluns = ctx.Weixin_Pinglun.Where(o => o.productId == productId).OrderByDescending(o => o.create).Take(50).ToList();
+                            if (productPingluns.Count > 0)
                             {
-                                var vm = new AppPingLunVM();
-                                vm.Id = product.ProductId;
-                                vm.ProductName = product.ProductName;
-                                vm.Title = productPinglun.title;
-                                vm.Icon = productPinglun.icon;
-                                vm.Date = productPinglun.create.Value.ToString("yyyy-MM-dd");
-                                vm.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?mobile=" + mobile + "&id=" + productPinglun.id;
-                                if (orders.Contains(productId))
+                                foreach (var productPinglun in productPingluns)
                                 {
-                                    vm.IsOrder = "YES";
+                                    var vm = new AppPingLunVM();
+                                    vm.Id = product.ProductId;
+                                    vm.ProductName = product.ProductName;
+                                    vm.Title = productPinglun.title;
+                                    vm.Icon = productPinglun.icon;
+                                    vm.Date = productPinglun.create.Value.ToString("yyyy-MM-dd");
+                                    vm.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?mobile=" + mobile + "&id=" + productPinglun.id;
+                                    if (orders.Contains(productId))
+                                    {
+                                        vm.IsOrder = "YES";
+                                    }
+                                    else
+                                    {
+                                        vm.IsOrder = "NO";
+                                    }
+                                    list.Add(vm);
                                 }
-                                else
-                                {
-                                    vm.IsOrder = "NO";
-                                }
-                                list.Add(vm);
                             }
                         }
                     }
-
 
                     //var pls = ctx.Weixin_Pinglun.Where(o => o.create > start && o.create < end).OrderByDescending(o => o.create);
                     //foreach (var pl in pls)

@@ -236,6 +236,9 @@
     <Property Name="SName" Type="nvarchar" MaxLength="50" />
     <Property Name="TaxIncluded" Type="nvarchar" MaxLength="50" />
     <Property Name="IsWeixinVisible" Type="bit" Nullable="false" />
+    <Property Name="spec" Type="nvarchar(max)" />
+    <Property Name="comment" Type="nvarchar(max)" />
+    <Property Name="parentName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="SmsRoles">
     <Key>
