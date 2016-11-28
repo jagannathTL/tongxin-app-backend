@@ -42,6 +42,56 @@ public class UserInfoHandler : IHttpHandler
             var str = GetJson(company);
             context.Response.Write(str);
         }
+        else if (method == "updateUserInfo")
+        {
+            var mobile = context.Request["mobile"];
+            var pics = context.Request["pics"] == null ? "" : context.Request["pics"].ToString();
+            var companyName = context.Request["companyName"] == null ? "" : context.Request["companyName"].ToString();
+            var contact = context.Request["contact"] == null ? "" : context.Request["contact"].ToString();
+            var tel = context.Request["tel"] == null ? "" : context.Request["tel"].ToString();
+            var industry = context.Request["industry"] == null ? "" : context.Request["industry"].ToString();
+            var product = context.Request["product"] == null ? "" : context.Request["product"].ToString();
+            var industryDesc = context.Request["industryDesc"] == null ? "" : context.Request["industryDesc"].ToString();
+            var provinceName = context.Request["provinceName"] == null ? "" : context.Request["provinceName"].ToString();
+            var cityName = context.Request["cityName"] == null ? "" : context.Request["cityName"].ToString();
+            var addressDesc = context.Request["addressDesc"] == null ? "" : context.Request["addressDesc"].ToString();
+            var isOpenMsg = context.Request["isOpenMsg"].ToString();
+
+            var picName = new List<string>();
+            if (!string.IsNullOrWhiteSpace(pics))
+            {
+                var arr = pics.Split(new string[] { "|||" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var a in arr)
+                {
+                    var fileName = Guid.NewGuid()+".jpg";
+                    var path = context.Server.MapPath("~/upload")+"/"+fileName;
+                    Byte[] streamByte = Convert.FromBase64String(a);
+                    System.IO.File.WriteAllBytes(path, streamByte);
+                    picName.Add(fileName);
+                }
+            }
+
+            UserCompanyInfoVM company = new UserCompanyInfoVM();
+            company.AppAddressDesc = addressDesc;
+            company.AppBusinessDesc = industryDesc;
+            company.AppCity = cityName;
+            company.AppCompanyName = companyName;
+            company.AppCustomerName = contact;
+            company.AppIndustry = industry;
+            company.AppProduct = product;
+            company.AppProvince = provinceName;
+            company.AppTel = tel;
+            company.IsOpenMsg = isOpenMsg.ToLower() == "true" ? true : false;
+            var flag = new UserInfoService().SaveUserCompany(mobile,company, picName);
+            if (flag)
+            {
+                context.Response.Write("{\"result\":\"ok\"}");
+            }
+            else
+            {
+                context.Response.Write("{\"result\":\"error\"}");
+            }
+        }
     }
 
     private string GetJson(UserCompanyInfoVM company)
@@ -62,7 +112,7 @@ public class UserInfoHandler : IHttpHandler
 
                 if (!string.IsNullOrWhiteSpace(company.AppCompanyPics))
                 {
-                    var arrPic = company.AppCompanyPics.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+                    var arrPic = company.AppCompanyPics.Split(new string[] { "|||" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var pic in arrPic)
                     {
                         writer.WriteValue("/upload/"+pic);

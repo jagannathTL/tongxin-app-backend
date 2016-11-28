@@ -79,5 +79,49 @@ namespace Service
                 }
             }
         }
+
+        public bool SaveUserCompany(string mobile, UserCompanyInfoVM company, List<string> pics)
+        {
+            using (var ctx = new ShtxSms2008Entities())
+            {
+                try
+                {
+                    var cb = ctx.CustomerBases.FirstOrDefault(o => o.SendInterFace == 102 && o.Tel.Contains(mobile));
+                    if (cb != null)
+                    {
+                        cb.AppAddressDesc = company.AppAddressDesc;
+                        cb.AppBusinessDesc = company.AppBusinessDesc;
+                        cb.AppCity = company.AppCity;
+                        cb.AppCompanyName = company.AppCompanyName;
+                        if (pics.Count > 0)
+                        {
+                            var str = string.Join("|||", pics);
+                            if (!string.IsNullOrWhiteSpace(cb.AppCompanyPics))
+                            {
+                                cb.AppCompanyPics += "|||";
+                            }
+                            cb.AppCompanyPics += str;
+                        }
+                        cb.AppCustomerName = company.AppCustomerName;
+                        cb.AppIndustry = company.AppIndustry;
+                        cb.AppProduct = company.AppProduct;
+                        cb.AppProvince = company.AppProvince;
+                        cb.IsOpenMsg = company.IsOpenMsg;
+                        cb.AppTel = company.AppTel;
+                        ctx.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                
+            }
+        }
     }
 }
