@@ -50,5 +50,34 @@ namespace Service
            
             return flag;
         }
+
+        public UserCompanyInfoVM GetUserComponyInfoByMobile(string mobile)
+        {
+            using (var ctx = new ShtxSms2008Entities())
+            {
+                var cb = ctx.CustomerBases.FirstOrDefault(o => o.Tel.Contains(mobile) && o.SendInterFace == 102);
+                if (cb != null)
+                {
+                    return new UserCompanyInfoVM()
+                    {
+                        AppAddressDesc = cb.AppAddressDesc,
+                        AppBusinessDesc = cb.AppBusinessDesc,
+                        AppCity = cb.AppCity,
+                        AppCompanyName = cb.AppCompanyName,
+                        AppCompanyPics = cb.AppCompanyPics,
+                        AppCustomerName = cb.AppCustomerName,
+                        AppIndustry = cb.AppIndustry,
+                        AppProduct = cb.AppProduct,
+                        AppProvince = cb.AppProvince,
+                        AppTel = cb.AppTel,
+                        IsOpenMsg = (cb.IsOpenMsg ?? false)
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

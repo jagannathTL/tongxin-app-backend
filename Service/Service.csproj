@@ -87,6 +87,7 @@
     <Compile Include="ViewModel\ProductPriceVM.cs" />
     <Compile Include="ViewModel\SearchPriceVM.cs" />
     <Compile Include="ViewModel\SupplyVM.cs" />
+    <Compile Include="ViewModel\UserCompanyInfoVM.cs" />
     <Compile Include="ViewModel\UserInfoVM.cs" />
   </ItemGroup>
   <ItemGroup>

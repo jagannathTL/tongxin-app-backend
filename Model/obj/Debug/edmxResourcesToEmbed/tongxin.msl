@@ -4,6 +4,17 @@
     <EntitySetMapping Name="CustomerBases">
       <EntityTypeMapping TypeName="ShtxSms2008Model.CustomerBase">
         <MappingFragment StoreEntitySet="CustomerBase">
+          <ScalarProperty Name="IsOpenMsg" ColumnName="IsOpenMsg" />
+          <ScalarProperty Name="AppAddressDesc" ColumnName="AppAddressDesc" />
+          <ScalarProperty Name="AppCity" ColumnName="AppCity" />
+          <ScalarProperty Name="AppProvince" ColumnName="AppProvince" />
+          <ScalarProperty Name="AppBusinessDesc" ColumnName="AppBusinessDesc" />
+          <ScalarProperty Name="AppProduct" ColumnName="AppProduct" />
+          <ScalarProperty Name="AppIndustry" ColumnName="AppIndustry" />
+          <ScalarProperty Name="AppTel" ColumnName="AppTel" />
+          <ScalarProperty Name="AppCustomerName" ColumnName="AppCustomerName" />
+          <ScalarProperty Name="AppCompanyPics" ColumnName="AppCompanyPics" />
+          <ScalarProperty Name="AppCompanyName" ColumnName="AppCompanyName" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="Tel" ColumnName="Tel" />

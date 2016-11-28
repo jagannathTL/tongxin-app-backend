@@ -115,6 +115,17 @@
     <Property Name="Password" Type="varchar" MaxLength="250" />
     <Property Name="Salt" Type="int" />
     <Property Name="Birthday" Type="smalldatetime" />
+    <Property Name="AppCompanyName" Type="nvarchar(max)" />
+    <Property Name="AppCompanyPics" Type="nvarchar(max)" />
+    <Property Name="AppCustomerName" Type="nvarchar(max)" />
+    <Property Name="AppTel" Type="nvarchar" MaxLength="50" />
+    <Property Name="AppIndustry" Type="nvarchar" MaxLength="200" />
+    <Property Name="AppProduct" Type="nvarchar" MaxLength="200" />
+    <Property Name="AppBusinessDesc" Type="nvarchar(max)" />
+    <Property Name="AppProvince" Type="nvarchar" MaxLength="200" />
+    <Property Name="AppCity" Type="nvarchar" MaxLength="200" />
+    <Property Name="AppAddressDesc" Type="nvarchar(max)" />
+    <Property Name="IsOpenMsg" Type="bit" />
   </EntityType>
   <EntityType Name="CustomerExtend">
     <Key>

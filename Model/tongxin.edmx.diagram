@@ -16,7 +16,7 @@
         <AssociationConnector Association="ShtxSms2008Model.FK_Gps_Market" />
         <EntityTypeShape EntityType="ShtxSms2008Model.Weixin_Pinglun" Width="1.5" PointX="2.5" PointY="7.25" />
         <EntityTypeShape EntityType="ShtxSms2008Model.AppCustomerToken" Width="1.5" PointX="4.25" PointY="7.625" />
-        <EntityTypeShape EntityType="ShtxSms2008Model.CataLog" Width="1.5" PointX="0.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.CataLog" Width="1.5" PointX="0.5" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ShtxSms2008Model.Channel" Width="1.5" PointX="3.5" PointY="10.25" />
         <AssociationConnector Association="ShtxSms2008Model.FK_CataLog_Channel" />
         <EntityTypeShape EntityType="ShtxSms2008Model.Image" Width="1.5" PointX="5.375" PointY="12.125" />

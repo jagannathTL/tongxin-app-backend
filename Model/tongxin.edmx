@@ -120,6 +120,17 @@
           <Property Name="Password" Type="varchar" MaxLength="250" />
           <Property Name="Salt" Type="int" />
           <Property Name="Birthday" Type="smalldatetime" />
+          <Property Name="AppCompanyName" Type="nvarchar(max)" />
+          <Property Name="AppCompanyPics" Type="nvarchar(max)" />
+          <Property Name="AppCustomerName" Type="nvarchar(max)" />
+          <Property Name="AppTel" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppIndustry" Type="nvarchar" MaxLength="200" />
+          <Property Name="AppProduct" Type="nvarchar" MaxLength="200" />
+          <Property Name="AppBusinessDesc" Type="nvarchar(max)" />
+          <Property Name="AppProvince" Type="nvarchar" MaxLength="200" />
+          <Property Name="AppCity" Type="nvarchar" MaxLength="200" />
+          <Property Name="AppAddressDesc" Type="nvarchar(max)" />
+          <Property Name="IsOpenMsg" Type="bit" />
         </EntityType>
         <EntityType Name="CustomerExtend">
           <Key>
@@ -446,6 +457,17 @@
           <Property Name="Password" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
           <Property Name="Salt" Type="Int32" />
           <Property Type="DateTime" Name="Birthday" Precision="0" />
+          <Property Type="String" Name="AppCompanyName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppCompanyPics" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppCustomerName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppTel" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppIndustry" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppProduct" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppBusinessDesc" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppProvince" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppCity" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AppAddressDesc" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsOpenMsg" />
         </EntityType>
         <EntityType Name="CustomerExtend">
           <Key>
@@ -756,6 +778,17 @@
           <EntitySetMapping Name="CustomerBases">
             <EntityTypeMapping TypeName="ShtxSms2008Model.CustomerBase">
               <MappingFragment StoreEntitySet="CustomerBase">
+                <ScalarProperty Name="IsOpenMsg" ColumnName="IsOpenMsg" />
+                <ScalarProperty Name="AppAddressDesc" ColumnName="AppAddressDesc" />
+                <ScalarProperty Name="AppCity" ColumnName="AppCity" />
+                <ScalarProperty Name="AppProvince" ColumnName="AppProvince" />
+                <ScalarProperty Name="AppBusinessDesc" ColumnName="AppBusinessDesc" />
+                <ScalarProperty Name="AppProduct" ColumnName="AppProduct" />
+                <ScalarProperty Name="AppIndustry" ColumnName="AppIndustry" />
+                <ScalarProperty Name="AppTel" ColumnName="AppTel" />
+                <ScalarProperty Name="AppCustomerName" ColumnName="AppCustomerName" />
+                <ScalarProperty Name="AppCompanyPics" ColumnName="AppCompanyPics" />
+                <ScalarProperty Name="AppCompanyName" ColumnName="AppCompanyName" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="Tel" ColumnName="Tel" />

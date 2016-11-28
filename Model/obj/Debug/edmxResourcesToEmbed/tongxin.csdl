@@ -73,6 +73,17 @@
     <Property Name="Password" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
     <Property Name="Salt" Type="Int32" />
     <Property Type="DateTime" Name="Birthday" Precision="0" />
+    <Property Type="String" Name="AppCompanyName" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppCompanyPics" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppCustomerName" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppTel" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppIndustry" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppProduct" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppBusinessDesc" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppProvince" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppCity" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppAddressDesc" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsOpenMsg" />
   </EntityType>
   <EntityType Name="CustomerExtend">
     <Key>

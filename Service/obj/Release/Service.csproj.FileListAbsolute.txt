@@ -22,3 +22,15 @@ D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Release\Entity
 D:\公司GitHub项目管理目录\tongxin-app-backend\Service\obj\Release\Service.csprojResolveAssemblyReference.cache
 D:\公司GitHub项目管理目录\tongxin-app-backend\Service\obj\Release\Service.dll
 D:\公司GitHub项目管理目录\tongxin-app-backend\Service\obj\Release\Service.pdb
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\Service.dll.config
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\Service.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\Service.pdb
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\EntityFramework.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\Model.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\Model.pdb
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\EntityFramework.xml
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\obj\Release\Service.csprojResolveAssemblyReference.cache
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\obj\Release\Service.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\obj\Release\Service.pdb
