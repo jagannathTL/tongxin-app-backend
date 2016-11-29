@@ -23,6 +23,5 @@ C:\Users\lvb\Desktop\tongxin-app-backend\Model\bin\Debug\EntityFramework.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Model\bin\Debug\EntityFramework.xml
 C:\Users\lvb\Desktop\tongxin-app-backend\Model\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\lvb\Desktop\tongxin-app-backend\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 C:\Users\lvb\Desktop\tongxin-app-backend\Model\obj\Debug\Model.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Model\obj\Debug\Model.pdb

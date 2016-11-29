@@ -279,6 +279,9 @@
     <Property Name="isChecked" Type="bit" />
     <Property Name="Creater" Type="nvarchar" MaxLength="50" />
     <Property Name="Price" Type="nvarchar" MaxLength="50" />
+    <Property Name="buissnes" Type="nvarchar(max)" />
+    <Property Name="province" Type="nvarchar(max)" />
+    <Property Name="city" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Weixin_Pinglun">
     <Key>

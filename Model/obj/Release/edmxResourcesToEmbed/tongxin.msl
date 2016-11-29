@@ -239,6 +239,9 @@
     <EntitySetMapping Name="Supplies">
       <EntityTypeMapping TypeName="ShtxSms2008Model.Supply">
         <MappingFragment StoreEntitySet="Supply">
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="buissnes" ColumnName="buissnes" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Creater" ColumnName="Creater" />
           <ScalarProperty Name="isChecked" ColumnName="isChecked" />

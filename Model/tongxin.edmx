@@ -284,6 +284,9 @@
           <Property Name="isChecked" Type="bit" />
           <Property Name="Creater" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="buissnes" Type="nvarchar(max)" />
+          <Property Name="province" Type="nvarchar(max)" />
+          <Property Name="city" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Weixin_Pinglun">
           <Key>
@@ -697,6 +700,9 @@
           <Property Name="isChecked" Type="Boolean" />
           <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Price" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="buissnes" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="province" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="city" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Supply_Province">
           <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="1" />
@@ -1013,6 +1019,9 @@
           <EntitySetMapping Name="Supplies">
             <EntityTypeMapping TypeName="ShtxSms2008Model.Supply">
               <MappingFragment StoreEntitySet="Supply">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="buissnes" ColumnName="buissnes" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Creater" ColumnName="Creater" />
                 <ScalarProperty Name="isChecked" ColumnName="isChecked" />

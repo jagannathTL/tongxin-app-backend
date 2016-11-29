@@ -33,6 +33,9 @@ namespace Model
         public Nullable<bool> isChecked { get; set; }
         public string Creater { get; set; }
         public string Price { get; set; }
+        public string buissnes { get; set; }
+        public string province { get; set; }
+        public string city { get; set; }
     
         public virtual Province Province { get; set; }
         public virtual ICollection<Image> Images { get; set; }

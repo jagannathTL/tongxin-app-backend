@@ -16,6 +16,7 @@ namespace Service
             var flag = false;
             var tokenTel = "";
             var tokenToken = "";
+            var exitPhoneType = "0";
             if (mobile.Length != 11)
             {
                 //电话号码不正确
@@ -75,7 +76,7 @@ namespace Service
                                     appToken.salt = 0;
                                     appToken.devicetoken = token;
                                     appToken.PrePhoneType = appToken.PhoneType;
-                                    
+                                    exitPhoneType = appToken.PrePhoneType.Value.ToString();
                                     flag = true;
                                 }
                                 appToken.PhoneType = phoneType;
@@ -100,12 +101,12 @@ namespace Service
             if (flag)
             {
                 //写一条记录到app——sms
-                AddMagForAPPSMS(tokenTel, tokenToken);
+                AddMagForAPPSMS(tokenTel, tokenToken, exitPhoneType);
             }
             return loginSuccess;
         }
 
-        public void AddMagForAPPSMS(string tel, string token)
+        public void AddMagForAPPSMS(string tel, string token, string phoneType)
         {
             using (var ctx = new MetalSmsSendEntities())
             {
@@ -116,6 +117,7 @@ namespace Service
                 sms.Mid = "admin";
                 sms.st = false;
                 sms.timestamp = DateTime.Now;
+                sms.Url = phoneType;
                 ctx.app_sms.Add(sms);
                 ctx.SaveChanges();
                 //Log.WriteLog("Login,count>0", "tel=" + tel + ",token=" + token);

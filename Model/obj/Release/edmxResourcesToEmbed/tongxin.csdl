@@ -313,6 +313,9 @@
     <Property Name="isChecked" Type="Boolean" />
     <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="Price" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="buissnes" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="province" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="city" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Supply_Province">
     <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="1" />
