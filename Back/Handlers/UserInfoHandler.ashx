@@ -94,6 +94,10 @@ public class UserInfoHandler : IHttpHandler
                 context.Response.Write("{\"result\":\"error\"}");
             }
         }
+        else if (method == "uploadCmpPic")
+        { 
+            
+        } 
     }
 
     private string GetJson(UserCompanyInfoVM company)

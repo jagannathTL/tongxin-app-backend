@@ -5,6 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{D9EB2396-4C58-46E2-B5F0-3F8D488DA8F8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{70158FDC-DA17-44BE-9DAF-2C5ADDBA2B92}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Back", "http://localhost:3838", "{52C2CBD4-1D96-4F20-9DFA-FA1E4A1427B9}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = ""
@@ -30,13 +37,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Back", "http://localhost:38
 		Release.AspNetCompiler.Debug = "False"
 		SlnRelativePath = "Back\"
 		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{70158FDC-DA17-44BE-9DAF-2C5ADDBA2B92}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global
