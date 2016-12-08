@@ -83,14 +83,16 @@ namespace Service
                 //DateTime start = today.AddDays(-6);
                 DateTime start = today.AddMonths(-6);
                 //var supplies = ctx.Supplies.Where(o => o.CatalogID == channelId && o.CreateDate >= start && o.CreateDate < tom && o.isChecked == true).OrderByDescending(o => o.CreateDate);
-                List<int> catalogIds = ctx.CataLogs.Where(o => o.ChannelId == channelId).Select(o => o.ID).ToList();
-                var supplies = ctx.Supplies.Where(o => catalogIds.Contains(o.CatalogID) && o.CreateDate >= start && o.CreateDate < tom && o.isChecked == true).OrderByDescending(o => o.CreateDate);
+                //change://
+                //List<int> catalogIds = ctx.CataLogs.Where(o => o.ChannelId == channelId).Select(o => o.ID).ToList();
+                List<int> catalogIds = CacheService.GetCataLogByChannelId(channelId).Select(o => o.Id).ToList();
+                var supplies = ctx.Supplies.Where(o => catalogIds.Contains(o.CatalogID.Value) && o.CreateDate >= start && o.CreateDate < tom && o.isChecked == true).OrderByDescending(o => o.CreateDate);
                 foreach (var supply in supplies)
                 {
                     SupplyViewVM vm = new SupplyViewVM();
                     vm.Id = supply.ID;
                     vm.Product = supply.Product;
-                    vm.SupplyType = supply.SupplyType;
+                    vm.SupplyType = supply.SupplyType.Value;
                     vm.Contact = supply.Contact;
                     vm.isChecked = supply.isChecked;
                     vm.Price = supply.Price;
@@ -157,7 +159,7 @@ namespace Service
                 
                 vm.Id = supply.ID;
                 vm.Product = supply.Product;
-                vm.SupplyType = supply.SupplyType;
+                vm.SupplyType = supply.SupplyType.Value;
                 vm.Contact = supply.Contact;
                 var city = ctx.Provinces.FirstOrDefault(o => o.ID == supply.ProviceID);
                 var province = ctx.Provinces.FirstOrDefault(o => o.ID == city.ParentID);
@@ -166,7 +168,7 @@ namespace Service
                 vm.Quantity = supply.Quantity;
                 vm.Mobile = supply.Mobile;
                 vm.Description = supply.Description;
-                vm.DeliveryType = supply.DeliveryType;
+                vm.DeliveryType = supply.DeliveryType.Value;
                 vm.Price = supply.Price;
                 var imgs = ctx.Images.Where(o => o.SupplyID == supply.ID).ToList();
                 var list = new List<string>();
@@ -199,7 +201,7 @@ namespace Service
                     SupplyViewVM vm = new SupplyViewVM();
                     vm.Id = supply.ID;
                     vm.Product = supply.Product;
-                    vm.SupplyType = supply.SupplyType;
+                    vm.SupplyType = supply.SupplyType.Value;
                     vm.Contact = supply.Contact;
                     vm.isChecked = supply.isChecked;
                     vm.Price = supply.Price;
