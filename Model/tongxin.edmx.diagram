@@ -21,14 +21,14 @@
         <AssociationConnector Association="ShtxSms2008Model.FK_CataLog_Channel" />
         <EntityTypeShape EntityType="ShtxSms2008Model.Image" Width="1.5" PointX="5.375" PointY="12.125" />
         <EntityTypeShape EntityType="ShtxSms2008Model.Province" Width="1.5" PointX="3.375" PointY="12.25" />
-        <EntityTypeShape EntityType="ShtxSms2008Model.Supply" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
-        <AssociationConnector Association="ShtxSms2008Model.FK_Supply_Province" />
-        <AssociationConnector Association="ShtxSms2008Model.FK_Image_Supply" />
         <EntityTypeShape EntityType="ShtxSms2008Model.App_user" Width="1.5" PointX="8.5" PointY="9.75" />
         <EntityTypeShape EntityType="ShtxSms2008Model.SmsRole" Width="1.5" PointX="11" PointY="10.875" />
         <EntityTypeShape EntityType="ShtxSms2008Model.ApkDownload" Width="1.5" PointX="7.875" PointY="13.75" />
         <EntityTypeShape EntityType="ShtxSms2008Model.MyAppGroup" Width="1.5" PointX="8.5" PointY="11.625" />
         <AssociationConnector Association="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup" />
+        <EntityTypeShape EntityType="ShtxSms2008Model.Supply" Width="1.5" PointX="0.75" PointY="12.125" />
+        <AssociationConnector Association="ShtxSms2008Model.FK_Image_Supply" />
+        <AssociationConnector Association="ShtxSms2008Model.FK_Supply_Province" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

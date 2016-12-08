@@ -23,15 +23,6 @@
     </AssociationSet>
     <EntitySet Name="Images" EntityType="ShtxSms2008Model.Image" />
     <EntitySet Name="Provinces" EntityType="ShtxSms2008Model.Province" />
-    <EntitySet Name="Supplies" EntityType="ShtxSms2008Model.Supply" />
-    <AssociationSet Name="FK_Supply_Province" Association="ShtxSms2008Model.FK_Supply_Province">
-      <End Role="Province" EntitySet="Provinces" />
-      <End Role="Supply" EntitySet="Supplies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Image_Supply" Association="ShtxSms2008Model.FK_Image_Supply">
-      <End Role="Supply" EntitySet="Supplies" />
-      <End Role="Image" EntitySet="Images" />
-    </AssociationSet>
     <EntitySet Name="App_user" EntityType="ShtxSms2008Model.App_user" />
     <EntitySet Name="SmsRoles" EntityType="ShtxSms2008Model.SmsRole" />
     <EntitySet Name="ApkDownloads" EntityType="ShtxSms2008Model.ApkDownload" />
@@ -39,6 +30,15 @@
     <AssociationSet Name="FK_MyAppGroup_XHMarketGroup" Association="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup">
       <End Role="XHMarketGroup" EntitySet="XHMarketGroups" />
       <End Role="MyAppGroup" EntitySet="MyAppGroups" />
+    </AssociationSet>
+    <EntitySet Name="Supplies" EntityType="ShtxSms2008Model.Supply" />
+    <AssociationSet Name="FK_Image_Supply" Association="ShtxSms2008Model.FK_Image_Supply">
+      <End Role="Supply" EntitySet="Supplies" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supply_Province" Association="ShtxSms2008Model.FK_Supply_Province">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="Supply" EntitySet="Supplies" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="CustomerBase">
@@ -293,54 +293,6 @@
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Supplies" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Province" ToRole="Supply" />
   </EntityType>
-  <EntityType Name="Supply">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Boolean" Name="SupplyType" Nullable="false" />
-    <Property Type="Int32" Name="CatalogID" Nullable="false" />
-    <Property Type="String" Name="Product" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Quantity" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Mobile" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Contact" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Boolean" Name="DeliveryType" Nullable="false" />
-    <Property Type="Int32" Name="ProviceID" Nullable="false" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Province" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Supply" ToRole="Province" />
-    <NavigationProperty Name="Images" Relationship="ShtxSms2008Model.FK_Image_Supply" FromRole="Supply" ToRole="Image" />
-    <Property Name="isChecked" Type="Boolean" />
-    <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Price" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Type="String" Name="buissnes" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="province" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="city" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="FK_Supply_Province">
-    <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="1" />
-    <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Province">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Supply">
-        <PropertyRef Name="ProviceID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Image_Supply">
-    <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="1" />
-    <End Type="ShtxSms2008Model.Image" Role="Image" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supply">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Image">
-        <PropertyRef Name="SupplyID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="App_user">
     <Key>
       <PropertyRef Name="Tel" />
@@ -385,6 +337,55 @@
       </Principal>
       <Dependent Role="MyAppGroup">
         <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Supply">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Boolean" Name="SupplyType" />
+    <Property Type="Int32" Name="CatalogID" />
+    <Property Type="String" Name="Product" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Quantity" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Mobile" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Contact" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="DeliveryType" />
+    <Property Type="Int32" Name="ProviceID" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+    <Property Type="Boolean" Name="isChecked" />
+    <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Price" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="buissnes" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="provinceName" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="cityName" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="DocumentType" />
+    <NavigationProperty Name="Images" Relationship="ShtxSms2008Model.FK_Image_Supply" FromRole="Supply" ToRole="Image" />
+    <NavigationProperty Name="Province" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Supply" ToRole="Province" />
+  </EntityType>
+  <Association Name="FK_Image_Supply">
+    <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="1" />
+    <End Type="ShtxSms2008Model.Image" Role="Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supply">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="SupplyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supply_Province">
+    <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="0..1" />
+    <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="ProviceID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

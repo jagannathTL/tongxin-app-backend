@@ -266,22 +266,23 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="SupplyType" Type="bit" Nullable="false" />
-    <Property Name="CatalogID" Type="int" Nullable="false" />
+    <Property Name="SupplyType" Type="bit" />
+    <Property Name="CatalogID" Type="int" />
     <Property Name="Product" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Quantity" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="Mobile" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="Contact" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="DeliveryType" Type="bit" Nullable="false" />
-    <Property Name="ProviceID" Type="int" Nullable="false" />
+    <Property Name="DeliveryType" Type="bit" />
+    <Property Name="ProviceID" Type="int" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="isChecked" Type="bit" />
     <Property Name="Creater" Type="nvarchar" MaxLength="50" />
     <Property Name="Price" Type="nvarchar" MaxLength="50" />
     <Property Name="buissnes" Type="nvarchar(max)" />
-    <Property Name="province" Type="nvarchar(max)" />
-    <Property Name="city" Type="nvarchar(max)" />
+    <Property Name="provinceName" Type="nvarchar(max)" />
+    <Property Name="cityName" Type="nvarchar(max)" />
+    <Property Name="DocumentType" Type="int" />
   </EntityType>
   <EntityType Name="Weixin_Pinglun">
     <Key>
@@ -367,7 +368,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Supply_Province">
-    <End Role="Province" Type="ShtxSms2008Model.Store.Province" Multiplicity="1" />
+    <End Role="Province" Type="ShtxSms2008Model.Store.Province" Multiplicity="0..1" />
     <End Role="Supply" Type="ShtxSms2008Model.Store.Supply" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Province">

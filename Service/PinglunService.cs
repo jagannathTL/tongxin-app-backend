@@ -40,7 +40,9 @@ namespace Service
                     var now = DateTime.Today;
                     //DateTime start = now.AddDays(-6);
                     //DateTime end = now.AddDays(1);
-                    var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).Select(o => o.ProductId).Distinct().ToList();
+                    //change://
+                    //var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).Select(o => o.ProductId).Distinct().ToList();
+                    var products = CacheService.GetProductByMarketId(marketId).Select(o => o.ProductId).Distinct().ToList();
 
                     if (products.Count > 0)
                     {//1

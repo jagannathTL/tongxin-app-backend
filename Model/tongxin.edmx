@@ -271,22 +271,23 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="SupplyType" Type="bit" Nullable="false" />
-          <Property Name="CatalogID" Type="int" Nullable="false" />
+          <Property Name="SupplyType" Type="bit" />
+          <Property Name="CatalogID" Type="int" />
           <Property Name="Product" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Quantity" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Mobile" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Contact" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="DeliveryType" Type="bit" Nullable="false" />
-          <Property Name="ProviceID" Type="int" Nullable="false" />
+          <Property Name="DeliveryType" Type="bit" />
+          <Property Name="ProviceID" Type="int" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="isChecked" Type="bit" />
           <Property Name="Creater" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="nvarchar" MaxLength="50" />
           <Property Name="buissnes" Type="nvarchar(max)" />
-          <Property Name="province" Type="nvarchar(max)" />
-          <Property Name="city" Type="nvarchar(max)" />
+          <Property Name="provinceName" Type="nvarchar(max)" />
+          <Property Name="cityName" Type="nvarchar(max)" />
+          <Property Name="DocumentType" Type="int" />
         </EntityType>
         <EntityType Name="Weixin_Pinglun">
           <Key>
@@ -372,7 +373,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Supply_Province">
-          <End Role="Province" Type="ShtxSms2008Model.Store.Province" Multiplicity="1" />
+          <End Role="Province" Type="ShtxSms2008Model.Store.Province" Multiplicity="0..1" />
           <End Role="Supply" Type="ShtxSms2008Model.Store.Supply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Province">
@@ -410,15 +411,6 @@
           </AssociationSet>
           <EntitySet Name="Images" EntityType="ShtxSms2008Model.Image" />
           <EntitySet Name="Provinces" EntityType="ShtxSms2008Model.Province" />
-          <EntitySet Name="Supplies" EntityType="ShtxSms2008Model.Supply" />
-          <AssociationSet Name="FK_Supply_Province" Association="ShtxSms2008Model.FK_Supply_Province">
-            <End Role="Province" EntitySet="Provinces" />
-            <End Role="Supply" EntitySet="Supplies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Image_Supply" Association="ShtxSms2008Model.FK_Image_Supply">
-            <End Role="Supply" EntitySet="Supplies" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
           <EntitySet Name="App_user" EntityType="ShtxSms2008Model.App_user" />
           <EntitySet Name="SmsRoles" EntityType="ShtxSms2008Model.SmsRole" />
           <EntitySet Name="ApkDownloads" EntityType="ShtxSms2008Model.ApkDownload" />
@@ -426,6 +418,15 @@
           <AssociationSet Name="FK_MyAppGroup_XHMarketGroup" Association="ShtxSms2008Model.FK_MyAppGroup_XHMarketGroup">
             <End Role="XHMarketGroup" EntitySet="XHMarketGroups" />
             <End Role="MyAppGroup" EntitySet="MyAppGroups" />
+          </AssociationSet>
+          <EntitySet Name="Supplies" EntityType="ShtxSms2008Model.Supply" />
+          <AssociationSet Name="FK_Image_Supply" Association="ShtxSms2008Model.FK_Image_Supply">
+            <End Role="Supply" EntitySet="Supplies" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Province" Association="ShtxSms2008Model.FK_Supply_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="Supply" EntitySet="Supplies" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CustomerBase">
@@ -680,54 +681,6 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Supplies" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Province" ToRole="Supply" />
         </EntityType>
-        <EntityType Name="Supply">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Boolean" Name="SupplyType" Nullable="false" />
-          <Property Type="Int32" Name="CatalogID" Nullable="false" />
-          <Property Type="String" Name="Product" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Quantity" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Mobile" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Contact" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="DeliveryType" Nullable="false" />
-          <Property Type="Int32" Name="ProviceID" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Province" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Supply" ToRole="Province" />
-          <NavigationProperty Name="Images" Relationship="ShtxSms2008Model.FK_Image_Supply" FromRole="Supply" ToRole="Image" />
-          <Property Name="isChecked" Type="Boolean" />
-          <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Price" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="buissnes" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="province" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="city" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_Supply_Province">
-          <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="1" />
-          <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Province">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Supply">
-              <PropertyRef Name="ProviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Image_Supply">
-          <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="1" />
-          <End Type="ShtxSms2008Model.Image" Role="Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supply">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="SupplyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="App_user">
           <Key>
             <PropertyRef Name="Tel" />
@@ -772,6 +725,55 @@
             </Principal>
             <Dependent Role="MyAppGroup">
               <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Supply">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="SupplyType" />
+          <Property Type="Int32" Name="CatalogID" />
+          <Property Type="String" Name="Product" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Quantity" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Mobile" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Contact" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="DeliveryType" />
+          <Property Type="Int32" Name="ProviceID" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="isChecked" />
+          <Property Type="String" Name="Creater" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Price" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="buissnes" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="provinceName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="cityName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="DocumentType" />
+          <NavigationProperty Name="Images" Relationship="ShtxSms2008Model.FK_Image_Supply" FromRole="Supply" ToRole="Image" />
+          <NavigationProperty Name="Province" Relationship="ShtxSms2008Model.FK_Supply_Province" FromRole="Supply" ToRole="Province" />
+        </EntityType>
+        <Association Name="FK_Image_Supply">
+          <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="1" />
+          <End Type="ShtxSms2008Model.Image" Role="Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supply">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="SupplyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Province">
+          <End Type="ShtxSms2008Model.Province" Role="Province" Multiplicity="0..1" />
+          <End Type="ShtxSms2008Model.Supply" Role="Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="ProviceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1016,29 +1018,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Supplies">
-            <EntityTypeMapping TypeName="ShtxSms2008Model.Supply">
-              <MappingFragment StoreEntitySet="Supply">
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="province" ColumnName="province" />
-                <ScalarProperty Name="buissnes" ColumnName="buissnes" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Creater" ColumnName="Creater" />
-                <ScalarProperty Name="isChecked" ColumnName="isChecked" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ProviceID" ColumnName="ProviceID" />
-                <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Product" ColumnName="Product" />
-                <ScalarProperty Name="CatalogID" ColumnName="CatalogID" />
-                <ScalarProperty Name="SupplyType" ColumnName="SupplyType" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="App_user">
             <EntityTypeMapping TypeName="ShtxSms2008Model.App_user">
               <MappingFragment StoreEntitySet="App_user">
@@ -1074,6 +1053,30 @@
                 <ScalarProperty Name="tel" ColumnName="tel" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplies">
+            <EntityTypeMapping TypeName="ShtxSms2008Model.Supply">
+              <MappingFragment StoreEntitySet="Supply">
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="provinceName" ColumnName="provinceName" />
+                <ScalarProperty Name="buissnes" ColumnName="buissnes" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="isChecked" ColumnName="isChecked" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ProviceID" ColumnName="ProviceID" />
+                <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="CatalogID" ColumnName="CatalogID" />
+                <ScalarProperty Name="SupplyType" ColumnName="SupplyType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

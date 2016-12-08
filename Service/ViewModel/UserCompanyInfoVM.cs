@@ -19,5 +19,6 @@ namespace Service.ViewModel
         public string AppCity { get; set; }
         public string AppAddressDesc { get; set; }
         public bool IsOpenMsg { get; set; }
+        public int Id { get; set; }
     }
 }

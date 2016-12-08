@@ -52,6 +52,8 @@ public class InboxMsgHandler : IHttpHandler
             for (int i = 0; i < list.Count; i++)
             {
                 writer.WriteStartObject();
+                writer.WritePropertyName("id");
+                writer.WriteValue(list[i].Id);
                 writer.WritePropertyName("msg");
                 writer.WriteValue(list[i].Msg);
                 writer.WritePropertyName("url");

@@ -46,7 +46,6 @@ public class UserInfoHandler : IHttpHandler
         {
             var mobile = context.Request["mobile"];
             var pics = context.Request["pics"] == null ? "" : context.Request["pics"].ToString();
-            //pics = @"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAylJREFUeAHt0DEBAAAAwqD1T20IX4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYOAdGL/UAAEPpnR6AAAAAElFTkSuQmCC|||data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAylJREFUeAHt0DEBAAAAwqD1T20IX4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYMCAAQMGDBgwYOAdGL/UAAEPpnR6AAAAAElFTkSuQmCC|||";
             var companyName = context.Request["companyName"] == null ? "" : context.Request["companyName"].ToString();
             var contact = context.Request["contact"] == null ? "" : context.Request["contact"].ToString();
             var tel = context.Request["tel"] == null ? "" : context.Request["tel"].ToString();
@@ -58,21 +57,6 @@ public class UserInfoHandler : IHttpHandler
             var addressDesc = context.Request["addressDesc"] == null ? "" : context.Request["addressDesc"].ToString();
             var isOpenMsg = context.Request["isOpenMsg"] == null ? "" : context.Request["isOpenMsg"].ToString();
 
-            var picName = new List<string>();
-            if (!string.IsNullOrWhiteSpace(pics))
-            {
-                var arr = pics.Split(new string[] { "|||" }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var a in arr)
-                {
-                    var pic = a.Replace("data:image/png;base64,","");
-                    var fileName = Guid.NewGuid()+".jpg";
-                    var path = context.Server.MapPath("~/upload")+"/"+fileName;
-                    Byte[] streamByte = Convert.FromBase64String(pic);
-                    System.IO.File.WriteAllBytes(path, streamByte);
-                    picName.Add(fileName);
-                }
-            }
-
             UserCompanyInfoVM company = new UserCompanyInfoVM();
             company.AppAddressDesc = addressDesc;
             company.AppBusinessDesc = industryDesc;
@@ -83,8 +67,9 @@ public class UserInfoHandler : IHttpHandler
             company.AppProduct = product;
             company.AppProvince = provinceName;
             company.AppTel = tel;
+            company.AppCompanyPics = pics;
             company.IsOpenMsg = isOpenMsg.ToLower() == "true" ? true : false;
-            var flag = new UserInfoService().SaveUserCompany(mobile,company, picName);
+            var flag = new UserInfoService().SaveUserCompany(mobile,company);
             if (flag)
             {
                 context.Response.Write("{\"result\":\"ok\"}");
@@ -94,12 +79,95 @@ public class UserInfoHandler : IHttpHandler
                 context.Response.Write("{\"result\":\"error\"}");
             }
         }
+        else if (method == "getPublish")
+        {
+            var id = Convert.ToInt32(context.Request["id"]);
+            var list = new UserInfoService().getUserCompanyInfo(id);
+            var str = GetJsons(list);
+            context.Response.Write(str);
+        }
         else if (method == "uploadCmpPic")
-        { 
-            
+        {
+            if (context.Request.Files.Count > 0)
+            {
+                try
+                {
+                    var file = context.Request.Files[0];
+                    var fileName = file.FileName;
+                    var ext = Path.GetExtension(fileName);
+                    var newName = Guid.NewGuid() + ext;
+                    file.SaveAs(context.Server.MapPath("~/upload") + "/" + newName);
+                    context.Response.Write("{\"result\":\"ok\",\"newName\":\"" + newName + "\"}");
+                }
+                catch
+                {
+                    context.Response.Write("{\"result\":\"error\"}");
+                }
+            }
         } 
     }
 
+    private string GetJsons(List<UserCompanyInfoVM> list)
+    {
+        StringWriter sw = new StringWriter();
+        using (JsonWriter writer = new JsonTextWriter(sw))
+        {
+            writer.Formatting = Formatting.None;
+            writer.WriteStartArray();
+            foreach (var company in list)
+            {
+                if (company != null)
+                {
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("companyName");
+                    writer.WriteValue(company.AppCompanyName);
+
+                    writer.WritePropertyName("companyPics");
+
+                    writer.WriteStartArray();
+
+                    if (!string.IsNullOrWhiteSpace(company.AppCompanyPics))
+                    {
+                        var arrPic = company.AppCompanyPics.Split(new string[] { "|||" }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (var pic in arrPic)
+                        {
+                            writer.WriteValue(pic);
+                        }
+                    }
+
+                    writer.WriteEndArray();
+
+                    writer.WritePropertyName("customerName");
+                    writer.WriteValue(company.AppCustomerName);
+                    writer.WritePropertyName("id");
+                    writer.WriteValue(company.Id);
+                    writer.WritePropertyName("tel");
+                    writer.WriteValue(company.AppTel);
+                    writer.WritePropertyName("industry");
+                    writer.WriteValue(company.AppIndustry);
+                    writer.WritePropertyName("product");
+                    writer.WriteValue(company.AppProduct);
+                    writer.WritePropertyName("businessDesc");
+                    writer.WriteValue(company.AppBusinessDesc);
+                    writer.WritePropertyName("province");
+                    writer.WriteValue(company.AppProvince);
+                    writer.WritePropertyName("city");
+                    writer.WriteValue(company.AppCity);
+                    writer.WritePropertyName("addressDesc");
+                    writer.WriteValue(company.AppAddressDesc);
+                    writer.WritePropertyName("isOpenMsg");
+                    writer.WriteValue(company.IsOpenMsg ? "true" : "false");
+                    writer.WriteEndObject();
+                }
+            }
+            
+            writer.WriteEndArray();
+            writer.Flush();
+            sw.Close();
+        }
+        return sw.GetStringBuilder().ToString();
+    }
+    
     private string GetJson(UserCompanyInfoVM company)
     { 
         StringWriter sw = new StringWriter();
@@ -121,7 +189,7 @@ public class UserInfoHandler : IHttpHandler
                     var arrPic = company.AppCompanyPics.Split(new string[] { "|||" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var pic in arrPic)
                     {
-                        writer.WriteValue("/upload/"+pic);
+                        writer.WriteValue(pic);
                     }
                 }
 

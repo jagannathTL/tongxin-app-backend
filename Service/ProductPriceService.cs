@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Service.ViewModel;
+using MongoDB.Bson;
+using MongoDB.Bson.IO;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 
 namespace Service
 {
@@ -27,7 +31,9 @@ namespace Service
                 if (cb != null)
                 {
                     mobile = cb.Tel;
-                    var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).OrderBy(p => p.DisplayOrder).ToList();
+                    //change://
+                    //var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).OrderBy(p => p.DisplayOrder).ToList();
+                    var products = CacheService.GetProductByMarketId(marketId).OrderBy(p => p.DisplayOrder).ToList();
                     var orderIds = ctx.Gps.Where(o => o.Tel == mobile && o.MarketID == marketId).Select(o => o.ProductID.Value).ToList();
                     foreach (var product in products)
                     {
@@ -47,7 +53,9 @@ namespace Service
                         {
                             vm.IsOrder = "NO";
                         }
-                        Price price = ctx.Prices.OrderByDescending(o => o.AddDate).FirstOrDefault(o => o.ProductID == product.ProductId);
+                        //mongo:
+                        //Price price = ctx.Prices.OrderByDescending(o => o.AddDate).FirstOrDefault(o => o.ProductID == product.ProductId);
+                        Price price = MongoDBService.GetLastPricesByProductId(product.ProductId);
                         if (price != null)
                         {
                             vm.LPrice = price.LPrice;
@@ -63,7 +71,7 @@ namespace Service
             }
         }
 
-        //获得所有现货商品最近更新价格信息
+        //获得所有现货商品最近更新价格信息,,,,更改为mongo后，弃用了.
         //public List<ProductPriceVM> GetAllMarketLastPrice()
         public Dictionary<int, ProductPriceVM> GetAllMarketLastPrice()
         {
@@ -127,7 +135,9 @@ namespace Service
                 if (cb != null)
                 {
                     mobile = cb.Tel;
-                    var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).OrderBy(p => p.DisplayOrder).ToList();
+                    //change://
+                    //var products = ctx.SmsProducts.Where(o => o.MarketId == marketId).OrderBy(p => p.DisplayOrder).ToList();
+                    var products = CacheService.GetProductByMarketId(marketId).OrderBy(p => p.DisplayOrder).ToList();
                     var orderIds = ctx.Gps.Where(o => o.Tel == mobile && o.MarketID == marketId).Select(o => o.ProductID.Value).ToList();
                     foreach (var product in products)
                     {
@@ -147,7 +157,9 @@ namespace Service
                         {
                             continue;
                         }
-                        Price price = ctx.Prices.OrderByDescending(o => o.AddDate).FirstOrDefault(o => o.ProductID == product.ProductId);
+                        //mongo:
+                        //Price price = ctx.Prices.OrderByDescending(o => o.AddDate).FirstOrDefault(o => o.ProductID == product.ProductId);
+                        Price price = MongoDBService.GetLastPricesByProductId(product.ProductId);
                         if (price != null)
                         {
                             vm.LPrice = price.LPrice;
@@ -166,24 +178,49 @@ namespace Service
         public List<ProductPriceVM> GetHistoryPrices(int productId, DateTime start, DateTime end)
         {
             var list = new List<ProductPriceVM>();
-            using (var ctx = new ShtxSms2008Entities())
+
+            //mongo:
+            //去mongo里取该productId对应的相应日期里的所有价格信息,下边代码为改进的，注释的是原来的代码
+            var prices = MongoDBService.GetHostoryPrices(productId, start, end);
+
+            while (start <= end)
             {
-                while (start <= end)
+                DateTime endTime = start.AddDays(1);
+
+                var price = prices.Where(o => o.ProductID == productId && o.AddDate < endTime && o.AddDate >= start).OrderByDescending(o => o.AddDate).FirstOrDefault();
+                if (price != null && (!string.IsNullOrEmpty(price.LPrice) || !string.IsNullOrEmpty(price.HPrice)))
                 {
-                    DateTime endTime = start.AddDays(1);
-                    var price = ctx.Prices.Where(o => (o.ProductID ?? 0) == productId && o.AddDate < endTime && o.AddDate >= start).OrderByDescending(o => o.AddDate).FirstOrDefault();
-                    if (price != null && (!string.IsNullOrEmpty(price.LPrice) || !string.IsNullOrEmpty(price.HPrice)))
-                    {
-                        ProductPriceVM vm = new ProductPriceVM();
-                        vm.Date = start.ToString("yyyy-MM-dd");
-                        vm.HPrice = string.IsNullOrEmpty(price.HPrice) ? price.LPrice : price.HPrice;
-                        vm.LPrice = string.IsNullOrEmpty(price.LPrice) ? price.HPrice : price.LPrice;
-                        vm.Change = CommonService.ChangePrice(price.PriceChange);
-                        list.Add(vm);
-                    }
-                    start = start.AddDays(1);
+                    ProductPriceVM vm = new ProductPriceVM();
+                    vm.Date = start.ToString("yyyy-MM-dd");
+                    vm.HPrice = string.IsNullOrEmpty(price.HPrice) ? price.LPrice : price.HPrice;
+                    vm.LPrice = string.IsNullOrEmpty(price.LPrice) ? price.HPrice : price.LPrice;
+                    vm.Change = CommonService.ChangePrice(price.PriceChange);
+                    list.Add(vm);
                 }
+
+                start = start.AddDays(1);
             }
+
+
+            //using (var ctx = new ShtxSms2008Entities())
+            //{
+            //    while (start <= end)
+            //    {
+            //        DateTime endTime = start.AddDays(1);
+
+            //        var price = ctx.Prices.Where(o => (o.ProductID ?? 0) == productId && o.AddDate < endTime && o.AddDate >= start).OrderByDescending(o => o.AddDate).FirstOrDefault();
+            //        if (price != null && (!string.IsNullOrEmpty(price.LPrice) || !string.IsNullOrEmpty(price.HPrice)))
+            //        {
+            //            ProductPriceVM vm = new ProductPriceVM();
+            //            vm.Date = start.ToString("yyyy-MM-dd");
+            //            vm.HPrice = string.IsNullOrEmpty(price.HPrice) ? price.LPrice : price.HPrice;
+            //            vm.LPrice = string.IsNullOrEmpty(price.LPrice) ? price.HPrice : price.LPrice;
+            //            vm.Change = CommonService.ChangePrice(price.PriceChange);
+            //            list.Add(vm);
+            //        }
+            //        start = start.AddDays(1);
+            //    }
+            //}
             return list.OrderByDescending(o => o.Date).ToList();
         }
     }

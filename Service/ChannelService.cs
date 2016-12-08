@@ -12,13 +12,15 @@ namespace Service
     {
         public List<ChannelVM> GetAllChannels()
         {
-            using (var ctx = new ShtxSms2008Entities())
-            {
-                return ctx.Channels.Select(o => new ChannelVM { 
-                    Id = o.ID,
-                    Name = o.Name
-                }).ToList();
-            }
+            //change://
+            //using (var ctx = new ShtxSms2008Entities())
+            //{
+            //    return ctx.Channels.Select(o => new ChannelVM { 
+            //        Id = o.ID,
+            //        Name = o.Name
+            //    }).ToList();
+            //}
+            return CacheService.GetChannel();
         }
     }
 }

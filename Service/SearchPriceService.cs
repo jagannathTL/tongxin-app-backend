@@ -16,7 +16,9 @@ namespace Service
             List<int> xhmarketIds = new List<int>();
             using (var ctx = new ShtxSms2008Entities())
             {
-                var groups = ctx.XHMarketGroups.Where(o=>o.Flag == 1 && o.IsForApp).Select(o => o.GroupID).ToList();
+                //change://
+                //var groups = ctx.XHMarketGroups.Where(o => o.Flag == 1 && o.IsForApp).Select(o => o.GroupID).ToList();
+                var groups = CacheService.GetMarketGroupForApp(1).Select(o => o.GroupID).ToList();
                 CustomerBase cb = ctx.CustomerBases.FirstOrDefault(o => o.Tel.Contains(mobile) && o.SendInterFace == 102);
                 if (cb != null)
                 {
@@ -24,7 +26,9 @@ namespace Service
                     var orderIds = ctx.Gps.Where(o => o.Tel == mobile).Select(o => o.ProductID.Value).ToList();
                     foreach (var group in groups)
                     {
-                        xhmarketIds.AddRange(ctx.Markets.Where(o => o.GroupID == group).Select(o => o.MarketId));
+                        //change://
+                        //xhmarketIds.AddRange(ctx.Markets.Where(o => o.GroupID == group).Select(o => o.MarketId));
+                        xhmarketIds.AddRange(CacheService.GetMarketByGroupId(group).Select(o => o.MarketId));
                     }
 
                     var result = ctx.SmsProducts.Where(o => o.ProductName.Contains(key) && xhmarketIds.Contains(o.MarketId.Value))
@@ -58,7 +62,9 @@ namespace Service
                                 {
                                     vm.IsOrder = "NO";
                                 }
-                                Price price = ctx.Prices.OrderByDescending(o => o.AddDate).FirstOrDefault(o => o.ProductID == product.ProductId);
+                                //mongo:
+                                //Price price = ctx.Prices.OrderByDescending(o => o.AddDate).FirstOrDefault(o => o.ProductID == product.ProductId);
+                                Price price = MongoDBService.GetLastPricesByProductId(product.ProductId);
                                 if (price != null)
                                 {
                                     vm.LPrice = price.LPrice;

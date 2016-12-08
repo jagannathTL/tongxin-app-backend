@@ -20,24 +20,25 @@ namespace Model
         }
     
         public int ID { get; set; }
-        public bool SupplyType { get; set; }
-        public int CatalogID { get; set; }
+        public Nullable<bool> SupplyType { get; set; }
+        public Nullable<int> CatalogID { get; set; }
         public string Product { get; set; }
         public string Quantity { get; set; }
         public string Mobile { get; set; }
         public string Contact { get; set; }
         public string Description { get; set; }
-        public bool DeliveryType { get; set; }
-        public int ProviceID { get; set; }
+        public Nullable<bool> DeliveryType { get; set; }
+        public Nullable<int> ProviceID { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<bool> isChecked { get; set; }
         public string Creater { get; set; }
         public string Price { get; set; }
         public string buissnes { get; set; }
-        public string province { get; set; }
-        public string city { get; set; }
+        public string provinceName { get; set; }
+        public string cityName { get; set; }
+        public Nullable<int> DocumentType { get; set; }
     
-        public virtual Province Province { get; set; }
         public virtual ICollection<Image> Images { get; set; }
+        public virtual Province Province { get; set; }
     }
 }

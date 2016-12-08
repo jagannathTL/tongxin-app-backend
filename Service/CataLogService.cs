@@ -12,14 +12,17 @@ namespace Service
     {
         public List<CataLogVM> GetCataLogByChannelId(int channelId)
         {
-            using (var ctx = new ShtxSms2008Entities())
-            {
-                return ctx.CataLogs.Where(o => o.ChannelId == channelId).Select(o => new CataLogVM {
-                    Id = o.ID,
-                    Name = o.KeyName,
-                    Desc = o.Description
-                }).ToList();
-            }
+            //change://
+            //using (var ctx = new ShtxSms2008Entities())
+            //{
+                //return ctx.CataLogs.Where(o => o.ChannelId == channelId).Select(o => new CataLogVM {
+                //    Id = o.ID,
+                //    Name = o.KeyName,
+                //    Desc = o.Description
+                //}).ToList();
+                
+            //}
+            return CacheService.GetCataLogByChannelId(channelId);
         }
     }
 }

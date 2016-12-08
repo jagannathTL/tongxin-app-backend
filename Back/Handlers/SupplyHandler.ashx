@@ -130,6 +130,135 @@ public class SupplyHandler : IHttpHandler
             var result = flag ? "ok" : "error";
             context.Response.Write("{\"result\":\"" + result + "\"}");
         }
+        else if (method == "addTrade")
+        {
+            //var mobile = context.Request["mobile"].ToString();
+            //var documentType = Convert.ToInt32(context.Request["documentType"]);
+            //var buissnes = context.Request["buissnes"].ToString();//所属行业
+            //var product = context.Request["product"].ToString();//名称
+            //var quantity = context.Request["quantity"].ToString();//数量
+            //var price = context.Request["price"].ToString();//价格
+            //var tel = context.Request["tel"].ToString();//联系方式
+            //var contact = context.Request["contact"].ToString();//联系人
+            //var province = context.Request["province"].ToString();//省份
+            //var city = context.Request["city"].ToString();//城市
+            //var description = context.Request["description"].ToString();//备注
+            //var imgs = context.Request["imgs"] == null ? "" : context.Request["imgs"].ToString();//图片
+
+
+            var mobile = "13524259846";
+            var documentType = 0;
+            var buissnes = "基本金属";//所属行业
+            var product = "名称";//名称
+            var quantity = "数量";//数量
+            var price = "价格";//价格
+            var tel = "联系方式";//联系方式
+            var contact = "联系人";//联系人
+            var province = "北京";//省份
+            var city = "东城区";//城市
+            var description = "详细描述";//备注
+            var imgs = "";//图片
+            
+            TradeVM tradeVm = new TradeVM();
+            tradeVm.Buissnes = buissnes;
+            tradeVm.City = city;
+            tradeVm.Contact = contact;
+            tradeVm.ContactTel = tel;
+            tradeVm.Description = description;
+            tradeVm.Mobile = mobile;
+            tradeVm.Price = price;
+            tradeVm.Product = product;
+            tradeVm.Province = province;
+            tradeVm.Quantity = quantity;
+            tradeVm.DocumentType = documentType;
+            var tradeSvc = new TradeService();
+            var flag = tradeSvc.saveTrade(tradeVm, imgs);
+            var result = flag ? "ok" : "error";
+            context.Response.Write("{\"result\":\"" + result + "\"}");
+        }
+        else if (method == "getTradeList")
+        {
+            var id = Convert.ToInt32(context.Request["id"]);
+            var documentType = Convert.ToInt32(context.Request["documentType"]);
+            var searchKey = context.Request["searchKey"].ToString();
+            var area = context.Request["area"].ToString();
+            var business = context.Request["business"].ToString();
+            var action = context.Request["action"].ToString();//up or down
+            var list = new TradeService().GetMoreTradesById(id, documentType,searchKey,area,business,action);
+            var str = GetMoreTradeList(list);
+            context.Response.Write(str);
+            context.Response.Flush();
+            context.Response.End();
+        }
+    }
+
+    private string GetMoreTradeList(List<TradeVM> list)
+    {
+        StringWriter sw = new StringWriter();
+        using (JsonWriter writer = new JsonTextWriter(sw))
+        {
+            writer.Formatting = Formatting.None;
+            writer.WriteStartArray();
+
+            foreach (var trade in list)
+            {
+                writer.WriteStartObject();
+
+                writer.WritePropertyName("id");
+                writer.WriteValue(trade.Id);
+                writer.WritePropertyName("product");
+                writer.WriteValue(trade.Product);
+                writer.WritePropertyName("province");
+                writer.WriteValue(trade.Province ?? "");
+                writer.WritePropertyName("city");
+                writer.WriteValue(trade.City ?? "");
+                writer.WritePropertyName("contact");
+                writer.WriteValue(trade.Contact);
+                writer.WritePropertyName("date");
+                writer.WriteValue(trade.Date);
+                writer.WritePropertyName("buissnes");
+                writer.WriteValue(trade.Buissnes ?? "");
+                writer.WritePropertyName("quantity");
+                writer.WriteValue(trade.Quantity);
+                writer.WritePropertyName("price");
+                writer.WriteValue(trade.Price);
+                writer.WritePropertyName("tel");
+                writer.WriteValue(trade.ContactTel);
+                writer.WritePropertyName("description");
+                writer.WriteValue(trade.Description);
+
+
+                writer.WritePropertyName("pics");
+                writer.WriteStartArray();
+                if (trade.Pics.Count > 0)
+                {
+                    foreach (var pic in trade.Pics)
+                    {
+                        writer.WriteValue(pic);
+                    }
+                }
+                writer.WriteEndArray();
+
+                writer.WritePropertyName("pics1");
+                writer.WriteStartArray();
+                if (trade.Pics.Count > 0)
+                {
+                    foreach (var pic in trade.Pics)
+                    {
+                        writer.WriteValue(Path.GetFileNameWithoutExtension(pic) + "-1" + Path.GetExtension(pic));
+                    }
+                }
+                writer.WriteEndArray();
+                
+                
+                writer.WriteEndObject();
+            }
+
+            writer.WriteEndArray();
+            writer.Flush();
+            sw.Close();
+        }
+        return sw.GetStringBuilder().ToString();
     }
 
     private string GetJson(List<SupplyViewVM> list)

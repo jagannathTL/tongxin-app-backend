@@ -34,3 +34,11 @@ C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\EntityFramework.SqlSe
 C:\Users\lvb\Desktop\tongxin-app-backend\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
 C:\Users\lvb\Desktop\tongxin-app-backend\Service\obj\Debug\Service.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Service\obj\Debug\Service.pdb
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Bson.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Core.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Legacy.dll
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Bson.xml
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.xml
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Core.xml
+C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Legacy.xml

@@ -13,6 +13,7 @@ public class DownloadCountHandler : IHttpHandler {
         {
             new Service.DownloadCountService().addCount();
         }
+        //Service.MongoDBService.GetAllLastPrice();
     }
  
     public bool IsReusable {

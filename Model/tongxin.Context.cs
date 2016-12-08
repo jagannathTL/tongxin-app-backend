@@ -39,10 +39,10 @@ namespace Model
         public DbSet<Channel> Channels { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Province> Provinces { get; set; }
-        public DbSet<Supply> Supplies { get; set; }
         public DbSet<App_user> App_user { get; set; }
         public DbSet<SmsRole> SmsRoles { get; set; }
         public DbSet<ApkDownload> ApkDownloads { get; set; }
         public DbSet<MyAppGroup> MyAppGroups { get; set; }
+        public DbSet<Supply> Supplies { get; set; }
     }
 }

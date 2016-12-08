@@ -80,7 +80,7 @@ namespace Service
             }
         }
 
-        public bool SaveUserCompany(string mobile, UserCompanyInfoVM company, List<string> pics)
+        public bool SaveUserCompany(string mobile, UserCompanyInfoVM company)
         {
             using (var ctx = new ShtxSms2008Entities())
             {
@@ -93,15 +93,7 @@ namespace Service
                         cb.AppBusinessDesc = company.AppBusinessDesc;
                         cb.AppCity = company.AppCity;
                         cb.AppCompanyName = company.AppCompanyName;
-                        if (pics.Count > 0)
-                        {
-                            var str = string.Join("|||", pics);
-                            if (!string.IsNullOrWhiteSpace(cb.AppCompanyPics))
-                            {
-                                cb.AppCompanyPics += "|||";
-                            }
-                            cb.AppCompanyPics += str;
-                        }
+                        cb.AppCompanyPics = company.AppCompanyPics;
                         cb.AppCustomerName = company.AppCustomerName;
                         cb.AppIndustry = company.AppIndustry;
                         cb.AppProduct = company.AppProduct;
@@ -123,5 +115,32 @@ namespace Service
                 
             }
         }
+
+        public List<UserCompanyInfoVM> getUserCompanyInfo(int id)
+        {
+            List<UserCompanyInfoVM> list = new List<UserCompanyInfoVM>();
+            using (var ctx  =new ShtxSms2008Entities())
+            {
+                var cbs =ctx.CustomerBases.Where(o => o.IsOpenMsg.Value && o.CustomerID > id).OrderBy(o => o.CustomerID).Take(30).ToList();
+                foreach (var cb in cbs)
+                {
+                    var vm = new UserCompanyInfoVM();
+                    vm.AppAddressDesc = cb.AppAddressDesc;
+                    vm.AppBusinessDesc = cb.AppBusinessDesc;
+                    vm.AppCity = cb.AppCity;
+                    vm.AppCompanyName = cb.AppCompanyName;
+                    vm.AppCompanyPics = cb.AppCompanyPics;
+                    vm.AppCustomerName = cb.AppCustomerName;
+                    vm.AppIndustry = cb.AppIndustry;
+                    vm.AppProduct = cb.AppProduct;
+                    vm.AppProvince = cb.AppProvince;
+                    vm.AppTel = cb.AppTel;
+                    vm.Id = cb.CustomerID;
+                    list.Add(vm);
+                }
+            }
+            return list;
+        }
+
     }
 }

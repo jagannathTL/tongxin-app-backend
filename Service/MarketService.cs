@@ -16,12 +16,16 @@ namespace Service
             var list = new List<MarketGroupVM>();
             using (var ctx = new ShtxSms2008Entities())
             {
-                var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                //change://
+                //var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                var groups = CacheService.GetMarketGroupForApp(flag);
                 foreach (var group in groups)
                 {
                     var groupId = group.GroupID;
                     var vm = new MarketGroupVM() { Id = groupId, Name = group.GroupName };
-                    vm.Market = ctx.Markets.Where(o => o.GroupID == groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
+                    //change://
+                    //vm.Market = ctx.Markets.Where(o => o.GroupID == groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
+                    vm.Market = CacheService.GetMarketByGroupId(groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
                     list.Add(vm);
                 }
             }
@@ -34,15 +38,18 @@ namespace Service
         /// <param name="mobile"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        private List<MarketVM> GetMyOrderMarkets(string mobile, int type)
+        private List<MarketVM> GetMyOrderMarkets(string mobile, int type, Dictionary<int, IEnumerable<Weixin_Pinglun>> threePl)
         {
 
             var list = new List<MarketVM>();
             List<int> xhmarketIds = new List<int>();
             var xhMarkets = new Dictionary<int, string>();
+
             using (var ctx = new ShtxSms2008Entities())
             {
-                var groups = ctx.XHMarketGroups.Where(o => (o.Flag == type) && o.IsForApp).ToList();
+                //change://
+                //var groups = ctx.XHMarketGroups.Where(o => (o.Flag == type) && o.IsForApp).ToList();
+                var groups = CacheService.GetMarketGroupForApp(type);
                 CustomerBase cb = ctx.CustomerBases.FirstOrDefault(o => o.Tel.Contains(mobile) && o.SendInterFace == 102);
                 if (cb != null)
                 {
@@ -50,7 +57,9 @@ namespace Service
 
                     foreach (var group in groups)
                     {
-                        var markets = ctx.Markets.Where(o => o.GroupID == group.GroupID).ToList();
+                        //change://
+                        //var markets = ctx.Markets.Where(o => o.GroupID == group.GroupID).ToList();
+                        var markets = CacheService.GetMarketByGroupId(group.GroupID);
                         foreach (var m in markets)
                         {
                             xhmarketIds.Add(m.MarketId);
@@ -69,8 +78,11 @@ namespace Service
                             MarketVM order = new MarketVM();
                             order.Id = marketId;
                             order.Name = xhMarkets[marketId];
-                            var hasProducts =ctx.SmsProducts.Where(o => o.MarketId == marketId && orderProducts.Contains(o.ProductId)).Select(o => o.ProductId).ToList();
-                            var pls = ctx.Weixin_Pinglun.OrderByDescending(o => o.create).Where(o => hasProducts.Contains(o.productId)).Take(3).ToList();
+                            //change://
+                            //var hasProducts = ctx.SmsProducts.Where(o => o.MarketId == marketId && orderProducts.Contains(o.ProductId)).Select(o => o.ProductId).ToList();
+                            //var pls = ctx.Weixin_Pinglun.OrderByDescending(o => o.create).Where(o => hasProducts.Contains(o.productId)).Take(3).ToList();
+                            var hasProducts = CacheService.GetProductByMarketId(marketId).Where(o => orderProducts.Contains(o.ProductId)).Select(o => o.ProductId).ToList();
+                            var pls = threePl.Where(o => hasProducts.Contains(o.Key)).SelectMany(o => o.Value).OrderByDescending(o => o.create).Take(3).ToList();
                             List<OrderPLVM> orderPls = new List<OrderPLVM>();
                             foreach (var pl in pls)
                             {
@@ -101,12 +113,26 @@ namespace Service
             return list;
         }
 
+        public Dictionary<int, IEnumerable<Weixin_Pinglun>> TakeNPLEachGroup(int n)
+        {
+            var list = new Dictionary<int, IEnumerable<Weixin_Pinglun>>();
+            using (var ctx = new ShtxSms2008Entities())
+            {
+                var query = ctx.Weixin_Pinglun.GroupBy(o => o.productId).Select(g => new { id = g.Key, list = g.OrderByDescending(p => p.create).Take(n) }).ToList();
+                foreach (var q in query)
+                {
+                    list.Add(q.id, q.list);
+                }
+            }
+            return list;
+        }
+
         public List<MarketGroupVM> GetMarkets(string mobile, int flag)
         {
             var list = new List<MarketGroupVM>();
             var listOrder = new List<int>();
             var defaultOrder = new List<int>();
-
+            var threePl = TakeNPLEachGroup(3);
             using (var ctx = new ShtxSms2008Entities())
             {
                 if (!string.IsNullOrWhiteSpace(mobile))
@@ -114,23 +140,31 @@ namespace Service
                     listOrder.AddRange(ctx.MyAppGroups.Where(o => o.tel == mobile && o.Flag == flag).OrderByDescending(o => o.DisplayOrder).Select(o => o.GroupID));
                     if (listOrder.Count == 0)
                     {
-                        defaultOrder.AddRange(ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && (o.IsDefault ?? false)).Select(o => o.GroupID));
+                        //change://
+                        //defaultOrder.AddRange(ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && (o.IsDefault ?? false)).Select(o => o.GroupID));
+                        defaultOrder.AddRange(CacheService.GetGroupsForApp(flag));
                     }
                 }
-                var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                //change://
+                //var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp);
+                var groups = CacheService.GetMarketGroupForApp(flag);
                 foreach (var group in groups)
                 {
                     var groupId = group.GroupID;
                     var vm = new MarketGroupVM() { Id = groupId, Name = group.GroupName };
-                    var markets = ctx.Markets.Where(o => o.GroupID == groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
-
+                    //change://
+                    //var markets = ctx.Markets.Where(o => o.GroupID == groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
+                    var markets = CacheService.GetMarketByGroupId(groupId).Select(o => new MarketVM { Id = o.MarketId, Name = o.MarketName, Order = (int)o.DisplayOrder }).OrderBy(o => o.Order).ToList();
                     //评论显示，显示三条最新的。
                     if (flag == (int)EnumMarketFlag.WXMarket)
                     {
                         foreach (var market in markets)
                         {
-                            var hasProducts = ctx.SmsProducts.Where(o => o.MarketId == market.Id).Select(o => o.ProductId).ToList();
-                            var pls = ctx.Weixin_Pinglun.OrderByDescending(o => o.create).Where(o => hasProducts.Contains(o.productId)).Take(3).ToList();
+                            //change://
+                            //var hasProducts = ctx.SmsProducts.Where(o => o.MarketId == market.Id).Select(o => o.ProductId).ToList();
+                            //var pls = ctx.Weixin_Pinglun.OrderByDescending(o => o.create).Where(o => hasProducts.Contains(o.productId)).Take(3).ToList();
+                            var hasProducts = CacheService.GetProductByMarketId(market.Id).Select(o => o.ProductId).ToList();
+                            var pls = threePl.Where(o => hasProducts.Contains(o.Key)).SelectMany(o => o.Value).OrderByDescending(o => o.create).Take(3).ToList();
                             List<OrderPLVM> orderPls = new List<OrderPLVM>();
                             foreach (var pl in pls)
                             {
@@ -207,7 +241,7 @@ namespace Service
                 root.Id = 0;
                 root.Name = "我的关注";
                 root.inBucket = "true";
-                var myOrder = GetMyOrderMarkets(mobile, flag);
+                var myOrder = GetMyOrderMarkets(mobile, flag, threePl);
                 root.Market = myOrder;
                 list.Insert(0, root);
             }

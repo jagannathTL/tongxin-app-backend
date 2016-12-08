@@ -83,7 +83,12 @@ namespace Service
             var xhMarkets = new Dictionary<int, string>();
             using (var ctx = new ShtxSms2008Entities())
             {
-                var groups = ctx.XHMarketGroups.Where(o => (o.Flag == 1 || o.Flag == 5) && o.IsForApp).Select(o => o.GroupID).ToList();
+                //change://
+                //var groups = ctx.XHMarketGroups.Where(o => (o.Flag == 1 || o.Flag == 5) && o.IsForApp).Select(o => o.GroupID).ToList();
+                var groups1 = CacheService.GetMarketGroupForApp(1);
+                var groups5 = CacheService.GetMarketGroupForApp(5);
+                groups1.AddRange(groups5);
+                var groups = groups1.Select(o => o.GroupID).ToList();
                 CustomerBase cb = ctx.CustomerBases.FirstOrDefault(o => o.Tel.Contains(mobile) && o.SendInterFace == 102);
                 if (cb != null)
                 {
@@ -91,7 +96,9 @@ namespace Service
 
                     foreach (var group in groups)
                     {
-                        var markets = ctx.Markets.Where(o => o.GroupID == group).ToList();
+                        //change://
+                        //var markets = ctx.Markets.Where(o => o.GroupID == group).ToList();
+                        var markets = CacheService.GetMarketByGroupId(group);
                         foreach (var m in markets)
                         {
                             xhmarketIds.Add(m.MarketId);

@@ -25,8 +25,9 @@ public class XHMarketHandler : IHttpHandler {
                 var priceSvc = new ProductPriceService();
                 var marketSvc = new MarketService();
 
-                var priceDic = priceSvc.GetAllMarketLastPrice();
-                
+                //mongo://
+                //var priceDic = priceSvc.GetAllMarketLastPrice();
+                var priceDic = MongoDBService.GetAllLastPrice();
                 //var orderList = ctx.AppGetOrderMarketPrice(mobile);
 
                 var list = marketSvc.GetMarkets(mobile, (int)Model.enums.EnumMarketFlag.XHMarket);
@@ -43,23 +44,45 @@ public class XHMarketHandler : IHttpHandler {
                                 var list1 = ctx.SmsProducts.Where(o => o.MarketId == tMarket.Id && orderIds.Contains(o.ProductId)).Select(o=>o.ProductId).ToList();
                                 if (list1.Count > 0)
                                 {
-                                    var orderPrice = ctx.Prices.Where(o => list1.Contains(o.ProductID.Value)).OrderByDescending(o => o.AddDate).FirstOrDefault();
-                                    
-                                    var orderProducts = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == orderPrice.ProductID);
-                                    if (tMarket.NewPrices == null)
+                                    //mongo://
+                                    //var orderPrice = ctx.Prices.Where(o => list1.Contains(o.ProductID.Value)).OrderByDescending(o => o.AddDate).FirstOrDefault();
+                                    var count = priceDic.Count(o => list1.Contains(o.Key));
+                                    if (count > 0)
                                     {
-                                        tMarket.NewPrices = new List<ProductPriceVM>();
-                                    }
-                                    var newPrice = new ProductPriceVM();
-                                    newPrice.AddDate = orderPrice.AddDate.Value;
-                                    newPrice.Change = CommonService.ChangePrice(orderPrice.PriceChange);
-                                    newPrice.Comment = orderProducts.comment;
-                                    newPrice.HPrice = orderPrice.HPrice;
-                                    newPrice.LPrice = orderPrice.LPrice;
-                                    newPrice.ProductId = orderPrice.ProductID.Value;
-                                    newPrice.ProductName = orderProducts.ProductName;
+                                        var keyValue = priceDic.Where(o => list1.Contains(o.Key)).OrderByDescending(o => o.Value.AddDate).FirstOrDefault();
+                                        var orderPrice = keyValue.Value;
+                                        var orderProducts = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == orderPrice.ProductId);
+                                        if (tMarket.NewPrices == null)
+                                        {
+                                            tMarket.NewPrices = new List<ProductPriceVM>();
+                                        }
+                                        var newPrice = new ProductPriceVM();
+                                        newPrice.AddDate = orderPrice.AddDate;
+                                        newPrice.Change = CommonService.ChangePrice(orderPrice.Change);
+                                        newPrice.Comment = orderProducts.comment;
+                                        newPrice.HPrice = orderPrice.HPrice;
+                                        newPrice.LPrice = orderPrice.LPrice;
+                                        newPrice.ProductId = orderPrice.ProductId;
+                                        newPrice.ProductName = orderProducts.ProductName;
 
-                                    tMarket.NewPrices.Add(newPrice);
+                                        tMarket.NewPrices.Add(newPrice);
+                                    }
+                                    else
+                                    { 
+                                        //没有最新价
+                                        var newPrice = new ProductPriceVM();
+                                        newPrice.AddDate = DateTime.Now;
+                                        newPrice.Change = "";
+                                        newPrice.Comment = "";
+                                        newPrice.HPrice = "";
+                                        newPrice.LPrice = "";
+                                        newPrice.ProductName = "";
+                                        if (tMarket.NewPrices == null)
+                                        {
+                                            tMarket.NewPrices = new List<ProductPriceVM>();
+                                        }
+                                        tMarket.NewPrices.Add(newPrice);
+                                    }
                                 }
                             }
                         }
