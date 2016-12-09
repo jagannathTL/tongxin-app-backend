@@ -108,19 +108,30 @@ namespace Service
         {
             var list = new Dictionary<int, ProductPriceVM>();
             var collection = db.GetCollection<MgPrice>("prices");
-            var data = collection.Find(o => o.isLatest).ToList();
-
-            foreach (var d in data)
+            var data = collection.Find(o => o.isLatest).SortByDescending(o=>o.addDate).ToList();
+            //var l = new List<MgPrice>();
+            //var g = data.GroupBy(o => o.productId);
+            //foreach (var gr in g)
+            //{
+            //    var c = data.Where(o => o.productId == gr.Key);
+            //    if (c.Count() > 1)
+            //    {
+            //        l.AddRange(c);
+            //    }
+            //}
+            var marketGroup = data.GroupBy(o => o.marketId);
+            foreach (var g in marketGroup)
             {
+                var productPrice = g.OrderByDescending(o => o.addDate).First();
                 var vm = new ProductPriceVM();
-                vm.AddDate = d.addDate.ToLocalTime();
-                vm.Change = d.change;
-                vm.LPrice = d.low;
-                vm.HPrice = d.high;
-                vm.ProductId = d.productId;
-                vm.MarketID = d.marketId;
-                vm.ProductName = CacheService.GetProductNameById(d.productId);
-                list.Add(d.productId, vm);
+                vm.AddDate = productPrice.addDate.ToLocalTime();
+                vm.Change = productPrice.change;
+                vm.LPrice = productPrice.low;
+                vm.HPrice = productPrice.high;
+                vm.ProductId = productPrice.productId;
+                vm.MarketID = productPrice.marketId;
+                vm.ProductName = CacheService.GetProductNameById(productPrice.productId);
+                list.Add(g.Key, vm);
             }
 
             return list;
