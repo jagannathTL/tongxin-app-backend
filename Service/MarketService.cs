@@ -70,6 +70,7 @@ namespace Service
                     
                     var marketIds = ctx.Gps.Where(o => o.Tel == mobile && xhmarketIds.Contains(o.MarketID.Value)).Select(o => o.MarketID.Value).Distinct().ToList();
 
+                    //评论，显示三条，价格不显示
                     if (type == (int)EnumMarketFlag.WXMarket)
                     {
                         var orderProducts = ctx.Gps.Where(o => o.Tel == mobile).Select(o => o.ProductID).Distinct().ToList();
@@ -132,7 +133,11 @@ namespace Service
             var list = new List<MarketGroupVM>();
             var listOrder = new List<int>();
             var defaultOrder = new List<int>();
-            var threePl = TakeNPLEachGroup(3);
+            //var threePl = TakeNPLEachGroup(3);
+            var threePl = new Dictionary<int,IEnumerable<Weixin_Pinglun>>();
+            //判断是否是评论或价格
+            if (flag == (int)EnumMarketFlag.WXMarket)
+                threePl = TakeNPLEachGroup(3);
             using (var ctx = new ShtxSms2008Entities())
             {
                 if (!string.IsNullOrWhiteSpace(mobile))

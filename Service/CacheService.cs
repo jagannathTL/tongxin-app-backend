@@ -150,5 +150,23 @@ namespace Service
                 }
             }
         }
+
+        private static Dictionary<int, string> productNameCache = new Dictionary<int, string>();
+        public static string GetProductNameById(int id)
+        {
+            if (productNameCache.ContainsKey(id))
+            {
+                return productNameCache[id];
+            }
+            else
+            {
+                using (var ctx = new ShtxSms2008Entities())
+                {
+                    var name = ctx.SmsProducts.First(o => o.ProductId == id).ProductName;
+                    productNameCache.Add(id, name);
+                    return name;
+                }
+            }
+        }
     }
 }

@@ -30,6 +30,7 @@ public class XHMarketHandler : IHttpHandler {
                 var priceDic = MongoDBService.GetAllLastPrice();
                 //var orderList = ctx.AppGetOrderMarketPrice(mobile);
 
+                //价格，不需要显示三条最新评论
                 var list = marketSvc.GetMarkets(mobile, (int)Model.enums.EnumMarketFlag.XHMarket);
 
                 foreach (var tGroup in list)

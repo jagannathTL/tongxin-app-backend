@@ -97,6 +97,7 @@ namespace Service
                 price.APrice = d.average;
                 price.PriceChange = d.change;
                 price.AddDate = d.addDate.ToLocalTime();
+                
                 list.Add(price);
             }
 
@@ -118,6 +119,7 @@ namespace Service
                 vm.HPrice = d.high;
                 vm.ProductId = d.productId;
                 vm.MarketID = d.marketId;
+                vm.ProductName = CacheService.GetProductNameById(d.productId);
                 list.Add(d.productId, vm);
             }
 
