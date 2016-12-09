@@ -199,15 +199,16 @@ namespace Service
             return list;
         }
 
-        //得到指定 productid 的当天所有评论 按倒序排列
-        public List<AppPingLunVM> GetPinglunByProductId(string mobile,int productId, DateTime start, DateTime end)
+        //得到指定 Marketid 的当天所有评论 按倒序排列
+        public List<AppPingLunVM> GetPinglunByMarketId(int marketId, DateTime start, DateTime end)
         {
             var list = new List<AppPingLunVM>();
 
             using (var ctx = new ShtxSms2008Entities())
             {
+                var orderdProductIds = ctx.SmsProducts.Where(o => o.MarketId == marketId).Select(o => o.ProductId).ToList();
 
-                var pls = ctx.Weixin_Pinglun.Where(o => o.productId == productId && o.create < end && o.create > start).OrderByDescending(o => o.create);
+                var pls = ctx.Weixin_Pinglun.Where(o => orderdProductIds.Contains(o.productId) && o.create < end && o.create > start).OrderByDescending(o => o.create);
 
                 foreach (var pl in pls)
                 {
@@ -220,7 +221,7 @@ namespace Service
                     vm.ProductName = (product == null ? "" : product.ProductName);
                     vm.Icon = pl.icon;
                     vm.Date = pl.create.Value.ToString("yyyy-MM-dd HH:mm:ss fff");
-                    vm.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?mobile=" + mobile + "&id=" + pl.id;
+                    vm.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?&id=" + pl.id;
                     list.Add(vm);
                 }
             }

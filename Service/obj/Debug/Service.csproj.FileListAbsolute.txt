@@ -42,3 +42,11 @@ C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Bson.xml
 C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.xml
 C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Core.xml
 C:\Users\lvb\Desktop\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Legacy.xml
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Bson.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Core.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Legacy.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Bson.xml
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.xml
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Core.xml
+D:\公司GitHub项目管理目录\tongxin-app-backend\Service\bin\Debug\MongoDB.Driver.Legacy.xml
