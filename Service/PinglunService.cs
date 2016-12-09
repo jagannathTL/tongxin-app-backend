@@ -198,5 +198,33 @@ namespace Service
             }
             return list;
         }
+
+        //得到指定 productid 的当天所有评论 按倒序排列
+        public List<AppPingLunVM> GetPinglunByProductId(string mobile,int productId, DateTime start, DateTime end)
+        {
+            var list = new List<AppPingLunVM>();
+
+            using (var ctx = new ShtxSms2008Entities())
+            {
+
+                var pls = ctx.Weixin_Pinglun.Where(o => o.productId == productId && o.create < end && o.create > start).OrderByDescending(o => o.create);
+
+                foreach (var pl in pls)
+                {
+                    var product = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == pl.productId);
+                    var market = ctx.Markets.FirstOrDefault(o => o.MarketId == product.MarketId);
+                    var vm = new AppPingLunVM();
+                    vm.Id = pl.productId;
+                    vm.Title = pl.title;
+                    vm.MarketName = (market == null ? "" : market.MarketName);
+                    vm.ProductName = (product == null ? "" : product.ProductName);
+                    vm.Icon = pl.icon;
+                    vm.Date = pl.create.Value.ToString("yyyy-MM-dd HH:mm:ss fff");
+                    vm.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?mobile=" + mobile + "&id=" + pl.id;
+                    list.Add(vm);
+                }
+            }
+            return list;
+        }
     }
 }

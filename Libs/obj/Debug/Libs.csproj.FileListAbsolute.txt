@@ -2,3 +2,8 @@ C:\Users\lvb\Desktop\tongxin-app-backend\Libs\bin\Debug\Libs.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\bin\Debug\Libs.pdb
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Libs\bin\Debug\Libs.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Libs\bin\Debug\Libs.pdb
+D:\公司GitHub项目管理目录\tongxin-app-backend\Libs\obj\Debug\Libs.csprojResolveAssemblyReference.cache
+D:\公司GitHub项目管理目录\tongxin-app-backend\Libs\obj\Debug\Libs.dll
+D:\公司GitHub项目管理目录\tongxin-app-backend\Libs\obj\Debug\Libs.pdb

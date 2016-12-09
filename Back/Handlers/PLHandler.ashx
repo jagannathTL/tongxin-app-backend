@@ -70,6 +70,19 @@ public class PLHandler : IHttpHandler
             new MarketService().saveGroupChannel(mobile, strGroups, (int)Model.enums.EnumMarketFlag.WXMarket);
             context.Response.End();
         }
+        else if (method == "getTodayComByProductId")
+        {
+            var mobile = context.Request["mobile"];
+            var productId = int.Parse(context.Request["productId"]);
+            var plSvc = new PinglunService();
+            var start = DateTime.Today.AddDays(0);
+            var end = DateTime.Today.AddDays(1);
+            var list = plSvc.GetPinglunByProductId(mobile,productId, start, end);
+            var str = GetPLWithMarketJson(list);
+            context.Response.Write(str);
+            context.Response.Flush();
+            context.Response.End();
+        }
     }
 
     private string GetMarketJson(List<MarketGroupVM> list)
