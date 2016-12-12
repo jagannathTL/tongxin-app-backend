@@ -87,7 +87,7 @@ namespace Service
             {
                 using (var ctx = new ShtxSms2008Entities())
                 {
-                    var list = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && (o.IsDefault ?? false)).Select(o => o.GroupID).ToList();
+                    var list = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && (o.IsDefault ?? false) && o.GroupID != 102 && o.GroupID != 103).Select(o => o.GroupID).ToList();
                     //defaultAppGroupsCache[flag] = list;
                     defaultAppGroupsCache.Add(flag, list);
                     return list;
@@ -106,7 +106,7 @@ namespace Service
             {
                 using (var ctx = new ShtxSms2008Entities())
                 {
-                    var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp).ToList();
+                    var groups = ctx.XHMarketGroups.Where(o => o.Flag == flag && o.IsForApp && o.GroupID != 102 && o.GroupID != 103).ToList();
                     marketGroupForAppCache.Add(flag, groups);
                     //marketGroupForAppCache[flag] = groups;
                     return groups;
