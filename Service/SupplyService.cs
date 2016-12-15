@@ -176,12 +176,12 @@ namespace Service
                 {
                     foreach (var img in imgs)
                     {
-                        list.Add("http://api.shtx.com.cn/Upload/" + img.Name);
+                        list.Add(img.Name);
                     }
                 }
                 else
                 {
-                    list.Add("http://api.shtx.com.cn/Upload/default.jpg");
+                    list.Add("default.jpg");
                 }
                 vm.Date = supply.CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
                 vm.Avatar = list;

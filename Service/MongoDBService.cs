@@ -125,7 +125,7 @@ namespace Service
                 var productPrice = g.OrderByDescending(o => o.addDate).First();
                 var vm = new ProductPriceVM();
                 vm.AddDate = productPrice.addDate.ToLocalTime();
-                vm.Change = productPrice.change;
+                vm.Change =CommonService.ChangePrice(productPrice.change);
                 vm.LPrice = productPrice.low;
                 vm.HPrice = productPrice.high;
                 vm.ProductId = productPrice.productId;
