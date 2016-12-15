@@ -2,4 +2,3 @@ C:\Users\lvb\Desktop\tongxin-app-backend\Libs\bin\Debug\Libs.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\bin\Debug\Libs.pdb
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.pdb
-C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.csprojResolveAssemblyReference.cache

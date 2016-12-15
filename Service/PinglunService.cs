@@ -47,7 +47,7 @@ namespace Service
                     if (products.Count > 0)
                     {//1
                         var orders = ctx.Gps.Where(o => o.Tel == mobile).Select(o => o.ProductID).Distinct().ToList();
-                        
+
                         foreach (var productId in products)
                         {
                             var product = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == productId);
@@ -226,6 +226,57 @@ namespace Service
                 }
             }
             return list;
+        }
+
+        public List<SearchPingLunVM> GetSearchPinglunResult(string mobile, string key)
+        {
+            List<SearchPingLunVM> result = new List<SearchPingLunVM>();
+            var list = new List<AppPingLunVM>();
+            using (var ctx = new ShtxSms2008Entities())
+            {
+                var plList = ctx.Weixin_Pinglun.Where(o => o.title.Contains(key)).OrderByDescending(o => o.create).ToList();
+                if (plList.Count > 0)
+                {
+                    var orderdProductIds = ctx.Gps.Where(o => o.Tel.Contains(mobile)).Select(o => o.ProductID).ToList();
+
+                    foreach (var pl in plList)
+                    {
+                        AppPingLunVM vm = new AppPingLunVM();
+
+                        vm.Id = pl.id;
+                        vm.ProductName = CacheService.GetProductNameById(pl.productId);
+                        if (vm.ProductName == string.Empty)
+                            continue;
+                        var market = CacheService.GetMarketByProductId(pl.productId);
+                        vm.MarketId = market.Item1;
+                        vm.MarketName = market.Item2;
+                        vm.Title = pl.title;
+                        vm.Icon = pl.icon;
+                        vm.Date = pl.create.Value.ToString("yyyy-MM-dd");
+                        vm.Url = "http://app.shtx.com.cn/StaticHtml/WeixinPingLun.html?mobile=" + mobile + "&id=" + pl.id;
+                        if (orderdProductIds.Contains(pl.productId))
+                        {
+                            vm.IsOrder = "YES";
+                        }
+                        else
+                        {
+                            vm.IsOrder = "NO";
+                        }
+                        list.Add(vm);
+                    }
+
+                    var group = list.GroupBy(o => o.MarketId);
+                    foreach (var g in group)
+                    {
+                        SearchPingLunVM search = new SearchPingLunVM();
+                        search.MarketId = g.Key;
+                        search.MarketName = g.First().MarketName;
+                        search.PingLunList = g.ToList();
+                        result.Add(search);
+                    }
+                }
+            }
+            return result;
         }
     }
 }

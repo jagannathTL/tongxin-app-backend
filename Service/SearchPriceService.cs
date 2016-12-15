@@ -32,7 +32,7 @@ namespace Service
                     }
 
                     var result = ctx.SmsProducts.Where(o => o.ProductName.Contains(key) && xhmarketIds.Contains(o.MarketId.Value))
-                        .Select(o => new searchProduct { MarketId = o.MarketId.Value, ProductId = o.ProductId, ProductName = o.ProductName }).ToList();
+                        .Select(o => new searchProduct { MarketId = o.MarketId.Value, ProductId = o.ProductId, ProductName = o.ProductName, Comment = o.comment }).ToList();
 
                     var markets = result.Select(o => o.MarketId).Distinct();
 
@@ -52,7 +52,8 @@ namespace Service
                                 var vm = new ProductPriceVM
                                 {
                                     ProductId = product.ProductId,
-                                    ProductName = product.ProductName
+                                    ProductName = product.ProductName,
+                                    Comment = product.Comment
                                 };
                                 if (orderIds.Contains(product.ProductId))
                                 {
@@ -75,7 +76,7 @@ namespace Service
                                     priceVm.prices.Add(vm);
                                 }
                             }
-                            if(priceVm.prices.Count>0)
+                            if (priceVm.prices.Count > 0)
                                 list.Add(priceVm);
                         }
                     }
@@ -90,5 +91,6 @@ namespace Service
         public int MarketId { get; set; }
         public int ProductId { get; set; }
         public string ProductName { get; set; }
+        public string Comment { get; set; }
     }
 }

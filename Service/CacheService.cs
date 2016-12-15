@@ -133,7 +133,7 @@ namespace Service
             }
         }
 
-        private static Dictionary<int, List<SmsProduct>> productCache = new Dictionary<int,List<SmsProduct>>();
+        private static Dictionary<int, List<SmsProduct>> productCache = new Dictionary<int, List<SmsProduct>>();
         public static List<SmsProduct> GetProductByMarketId(int marketId)
         {
             if (productCache.ContainsKey(marketId))
@@ -150,22 +150,73 @@ namespace Service
                 }
             }
         }
-
-        private static Dictionary<int, string> productNameCache = new Dictionary<int, string>();
-        public static string GetProductNameById(int id)
+        private static Dictionary<int, string> marketNameCache = new Dictionary<int, string>();
+        public static string GetMarketNameById(int id)
         {
-            if (productNameCache.ContainsKey(id))
+            if (marketNameCache.ContainsKey(id))
             {
-                return productNameCache[id];
+                return marketNameCache[id];
             }
             else
             {
                 using (var ctx = new ShtxSms2008Entities())
                 {
-                    var name = ctx.SmsProducts.First(o => o.ProductId == id).ProductName;
-                    productNameCache.Add(id, name);
+                    var name = ctx.Markets.Single(o => o.MarketId == id).MarketName;
+                    marketNameCache.Add(id, name);
                     return name;
                 }
+            }
+        }
+
+        private static Dictionary<int, Tuple<int, string, int, string>> productNameCache = new Dictionary<int, Tuple<int, string, int, string>>();
+        public static string GetProductNameById(int id)
+        {
+            if (productNameCache.ContainsKey(id))
+            {
+                return productNameCache[id].Item2;
+            }
+            else
+            {
+                using (var ctx = new ShtxSms2008Entities())
+                {
+                    var obj = GetProductAndMarketByProductId(id);
+                    var name = obj.Item2;
+                    productNameCache.Add(id, obj);
+                    return name;
+                }
+            }
+        }
+        public static Tuple<int, string> GetMarketByProductId(int id)
+        {
+            if (productNameCache.ContainsKey(id))
+            {
+                return Tuple.Create(productNameCache[id].Item3, productNameCache[id].Item4);
+            }
+            else
+            {
+                using (var ctx = new ShtxSms2008Entities())
+                {
+                    var obj = GetProductAndMarketByProductId(id);
+                    var tuple = Tuple.Create(obj.Item3, obj.Item4);
+                    productNameCache.Add(id, obj);
+                    return tuple;
+                }
+            }
+        }
+
+        private static Tuple<int, string, int, string> GetProductAndMarketByProductId(int productId)
+        {
+            using (var ctx = new ShtxSms2008Entities())
+            {
+                var product = ctx.SmsProducts.FirstOrDefault(o => o.ProductId == productId);
+                if (product == null)
+                {
+                    return Tuple.Create(0, "", 0, "");
+                }
+                var marketId = product.MarketId.Value;
+                var marketName = GetMarketNameById(marketId);
+
+                return Tuple.Create(productId, product.ProductName, marketId, marketName);
             }
         }
     }

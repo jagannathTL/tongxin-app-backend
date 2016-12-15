@@ -9,6 +9,7 @@ namespace Service.ViewModel
     public class AppPingLunVM
     {
         public int Id { get; set; }
+        public int MarketId { get; set; }
         public string ProductName { get; set; }
         public string MarketName { get; set; }
         public string Title { get; set; }
@@ -16,5 +17,12 @@ namespace Service.ViewModel
         public string Url { get; set; }
         public string Date { get; set; }
         public string IsOrder { get; set; }
+    }
+
+    public class SearchPingLunVM
+    {
+        public int MarketId { get; set; }
+        public string MarketName { get; set; }
+        public List<AppPingLunVM> PingLunList { get; set; }
     }
 }

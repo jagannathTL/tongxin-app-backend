@@ -64,6 +64,8 @@ public class SearchHandler : IHttpHandler {
                     writer.WriteValue(price.Date);
                     writer.WritePropertyName("Change");
                     writer.WriteValue(price.Change);
+                    writer.WritePropertyName("Comment");
+                    writer.WriteValue(price.Comment);
                     writer.WritePropertyName("isOrder");
                     writer.WriteValue(price.IsOrder);
                     writer.WriteEndObject();

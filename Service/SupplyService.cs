@@ -201,24 +201,40 @@ namespace Service
                     SupplyViewVM vm = new SupplyViewVM();
                     vm.Id = supply.ID;
                     vm.Product = supply.Product;
-                    vm.SupplyType = supply.SupplyType.Value;
+                    vm.SupplyType = supply.SupplyType.HasValue?supply.SupplyType.Value:false;
                     vm.Contact = supply.Contact;
                     vm.isChecked = supply.isChecked;
                     vm.Price = supply.Price;
+                    vm.Buissnes = supply.buissnes;
+                    vm.Description = supply.Description;
+                    vm.DocumentType = supply.DocumentType.Value;
+                    vm.Mobile = supply.Mobile;
+                    vm.Quantity = supply.Quantity;
+                    
 
-                    var img = ctx.Images.FirstOrDefault(o => o.SupplyID == supply.ID);
-                    if (img != null)
+                    var img = ctx.Images.Where(o => o.SupplyID == supply.ID).ToList();
+                    if (img.Count > 0)
                     {
-                        vm.Avatar = "http://api.shtx.com.cn/Upload/" + getAvatarName(img.Name);
+                        var pic = new List<string>();
+                        var pic1 = new List<string>();
+
+                        foreach (var i in img)
+                        {
+                            pic.Add("http://api.shtx.com.cn/Upload/" + i.Name);
+                            pic.Add("http://api.shtx.com.cn/Upload/" + getAvatarName(i.Name));
+                        }
+
+                        vm.Pics = pic;
+                        vm.Pics1 = pic1;
                     }
                     else
                     {
-                        vm.Avatar = "http://api.shtx.com.cn/Upload/default.jpg";
+                        vm.Pics1 = new List<string> { "http://api.shtx.com.cn/Upload/default.jpg" };
+                        vm.Pics = new List<string> { "http://api.shtx.com.cn/Upload/default.jpg" };
                     }
-                    var city = ctx.Provinces.FirstOrDefault(o => o.ID == supply.ProviceID);
-                    var province = ctx.Provinces.FirstOrDefault(o => o.ID == city.ParentID);
-                    var address = province.Name + city.Name;
-                    vm.Address = address;
+
+                    vm.ProvinceName = supply.provinceName;
+                    vm.CityName = supply.cityName;
                     if (supply.CreateDate >= today)
                     {
                         vm.Date = supply.CreateDate.ToString("HH:mm");

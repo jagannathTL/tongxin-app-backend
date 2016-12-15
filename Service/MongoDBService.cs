@@ -35,16 +35,16 @@ namespace Service
             //var client = new MongoClient(conn);
             db = client.GetDatabase("shtx");
 
-            
+
         }
         //private static string conn = @"mongodb://shtx:shyr021191@172.20.67.110:27017/shtx?readPreference=secondary";
 
         public static Price GetLastPricesByProductId(int productId)
         {
             Price price = null;
-            
+
             //var collection = db.GetCollection<BsonDocument>("prices");
-            
+
             //var filter = Builders<BsonDocument>.Filter.Eq("productId", productId);
             //var data = collection.Find(filter).Sort(Builders<BsonDocument>.Sort.Descending("addDate")).FirstOrDefault();
 
@@ -63,7 +63,7 @@ namespace Service
                 price.HPrice = data.high;
                 price.LPrice = data.low;
                 price.APrice = data.average;
-                price.PriceChange = data.change ;
+                price.PriceChange = data.change;
                 price.AddDate = data.addDate.ToLocalTime();
             }
 
@@ -97,7 +97,7 @@ namespace Service
                 price.APrice = d.average;
                 price.PriceChange = d.change;
                 price.AddDate = d.addDate.ToLocalTime();
-                
+
                 list.Add(price);
             }
 
@@ -108,7 +108,7 @@ namespace Service
         {
             var list = new Dictionary<int, ProductPriceVM>();
             var collection = db.GetCollection<MgPrice>("prices");
-            var data = collection.Find(o => o.isLatest).SortByDescending(o=>o.addDate).ToList();
+            var data = collection.Find(o => o.isLatest).SortByDescending(o => o.addDate).ToList();
             //var l = new List<MgPrice>();
             //var g = data.GroupBy(o => o.productId);
             //foreach (var gr in g)

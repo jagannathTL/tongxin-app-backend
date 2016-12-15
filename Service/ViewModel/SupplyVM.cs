@@ -31,12 +31,21 @@ namespace Service.ViewModel
         public bool SupplyType { get; set; }
         public bool? isChecked { get; set; }
         public int CatalogId { get; set; }
+        public List<string> Pics { get; set; }
+        public List<string> Pics1 { get; set; }
         public string Avatar { get; set; }
         public string Product { get; set; }
+        public string Quantity { get; set; }
+        public string Mobile { get; set; }
         public string Address { get; set; }
+        public string ProvinceName { get; set; }
+        public string CityName { get; set; }
         public string Contact { get; set; }
-        public string Date { get; set; }
+        public string Description { get; set; }
         public string Price { get; set; }
+        public string Date { get; set; }
+        public int DocumentType { get; set; }
+        public string Buissnes { get; set; }
     }
 
     public class SupplyDetailVM
