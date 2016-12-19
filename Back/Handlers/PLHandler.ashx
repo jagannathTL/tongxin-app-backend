@@ -82,6 +82,70 @@ public class PLHandler : IHttpHandler
             context.Response.Flush();
             context.Response.End();
         }
+        else if (method == "search")
+        {
+            var mobile = context.Request["mobile"];
+            var key = context.Request["key"];
+            var str = "";
+            if (!string.IsNullOrWhiteSpace(key))
+            {
+                var list = new PinglunService().GetSearchPinglunResult(mobile, key);
+                str = GetSearchPL(list);
+            }
+            if (str == "")
+            {
+                str = "[]";
+            }
+            context.Response.Write(str);
+            context.Response.Flush();
+            context.Response.End();
+        }
+    }
+
+    private string GetSearchPL(List<SearchPingLunVM> list)
+    {
+        StringWriter sw = new StringWriter();
+        using (JsonWriter writer = new JsonTextWriter(sw))
+        {
+            writer.Formatting = Formatting.None;
+            writer.WriteStartArray();
+            for (int i = 0; i < list.Count; i++)
+            {
+                writer.WriteStartObject();
+                writer.WritePropertyName("marketId");
+                writer.WriteValue(list[i].MarketId);
+                writer.WritePropertyName("marketName");
+                writer.WriteValue(list[i].MarketName);
+                writer.WritePropertyName("pinglun");
+                writer.WriteStartArray();
+                for (int j = 0; j < list[i].PingLunList.Count; j++)
+                {
+                    var pinglun = list[i].PingLunList[j];
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("id");
+                    writer.WriteValue(pinglun.Id.ToString());
+                    writer.WritePropertyName("productname");
+                    writer.WriteValue(pinglun.ProductName.ToString());
+                    writer.WritePropertyName("title");
+                    writer.WriteValue(pinglun.Title);
+                    writer.WritePropertyName("avatar");
+                    writer.WriteValue(pinglun.Icon);
+                    writer.WritePropertyName("url");
+                    writer.WriteValue(pinglun.Url);
+                    writer.WritePropertyName("date");
+                    writer.WriteValue(pinglun.Date);
+                    writer.WritePropertyName("isOrder");
+                    writer.WriteValue(pinglun.IsOrder);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+            writer.Flush();
+            sw.Close();
+        }
+        return sw.GetStringBuilder().ToString();
     }
 
     private string GetMarketJson(List<MarketGroupVM> list)

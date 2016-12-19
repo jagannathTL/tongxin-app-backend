@@ -27,3 +27,13 @@ C:\Users\lvb\Desktop\tongxin-app-backend\Model\obj\Debug\Model.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Model\obj\Debug\Model.pdb
 D:\公司GitHub项目管理目录\tongxin-app-backend\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 C:\Users\lvb\Desktop\tongxin-app-backend\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\work\tongxin-app-backend\Model\bin\Debug\Model.dll.config
+E:\work\tongxin-app-backend\Model\bin\Debug\Model.dll
+E:\work\tongxin-app-backend\Model\bin\Debug\Model.pdb
+E:\work\tongxin-app-backend\Model\bin\Debug\EntityFramework.dll
+E:\work\tongxin-app-backend\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\work\tongxin-app-backend\Model\bin\Debug\EntityFramework.xml
+E:\work\tongxin-app-backend\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\work\tongxin-app-backend\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\work\tongxin-app-backend\Model\obj\Debug\Model.dll
+E:\work\tongxin-app-backend\Model\obj\Debug\Model.pdb

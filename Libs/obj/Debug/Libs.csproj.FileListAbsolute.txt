@@ -3,3 +3,8 @@ C:\Users\lvb\Desktop\tongxin-app-backend\Libs\bin\Debug\Libs.pdb
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.dll
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.pdb
 C:\Users\lvb\Desktop\tongxin-app-backend\Libs\obj\Debug\Libs.csprojResolveAssemblyReference.cache
+E:\work\tongxin-app-backend\Libs\bin\Debug\Libs.dll
+E:\work\tongxin-app-backend\Libs\bin\Debug\Libs.pdb
+E:\work\tongxin-app-backend\Libs\obj\Debug\Libs.dll
+E:\work\tongxin-app-backend\Libs\obj\Debug\Libs.pdb
+E:\work\tongxin-app-backend\Libs\obj\Debug\Libs.csprojResolveAssemblyReference.cache

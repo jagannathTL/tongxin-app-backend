@@ -6,3 +6,5 @@
 *.pdb
 *.dll
 *.pdb
+*.pdb
+Model/obj/Debug/Model.dll
