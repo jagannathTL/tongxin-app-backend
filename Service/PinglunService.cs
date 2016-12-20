@@ -234,7 +234,10 @@ namespace Service
             var list = new List<AppPingLunVM>();
             using (var ctx = new ShtxSms2008Entities())
             {
-                var plList = ctx.Weixin_Pinglun.Where(o => o.title.Contains(key)).OrderByDescending(o => o.create).ToList();
+                var today = DateTime.Today;
+                var start = today.AddDays(-7);
+                var end = today.AddDays(1);
+                var plList = ctx.Weixin_Pinglun.Where(o => o.title.Contains(key) && o.create.Value >=start && o.create<=end).OrderByDescending(o => o.create).ToList();
                 if (plList.Count > 0)
                 {
                     var orderdProductIds = ctx.Gps.Where(o => o.Tel.Contains(mobile)).Select(o => o.ProductID).ToList();

@@ -21,21 +21,14 @@ namespace Service
             var set = new MongoClientSettings();
             var cred = new List<MongoCredential>() { MongoCredential.CreateCredential("shtx", "shtx", "shyr021191") };
             var server1 = new MongoServerAddress("172.20.67.110", 27017);
-            //var server2 = new MongoServerAddress("172.20.67.111", 27017);
-            //var server3 = new MongoServerAddress("172.20.67.111", 27018);
-            //var server4 = new MongoServerAddress("172.20.67.111", 27019);
             var servers = new List<MongoServerAddress>() { server1 };
-            //var servers = new List<MongoServerAddress>() { server1, server2, server3, server4 };
             set.Credentials = cred;
             set.Servers = servers;
             set.ConnectionMode = ConnectionMode.ReplicaSet;
             set.ReplicaSetName = "tongxin";
             set.ReadPreference = new ReadPreference(ReadPreferenceMode.SecondaryPreferred);
             var client = new MongoClient(set);
-            //var client = new MongoClient(conn);
             db = client.GetDatabase("shtx");
-
-
         }
         //private static string conn = @"mongodb://shtx:shyr021191@172.20.67.110:27017/shtx?readPreference=secondary";
 
@@ -108,17 +101,8 @@ namespace Service
         {
             var list = new Dictionary<int, ProductPriceVM>();
             var collection = db.GetCollection<MgPrice>("prices");
-            var data = collection.Find(o => o.isLatest).SortByDescending(o => o.addDate).ToList();
-            //var l = new List<MgPrice>();
-            //var g = data.GroupBy(o => o.productId);
-            //foreach (var gr in g)
-            //{
-            //    var c = data.Where(o => o.productId == gr.Key);
-            //    if (c.Count() > 1)
-            //    {
-            //        l.AddRange(c);
-            //    }
-            //}
+            var data = collection.Find(o => o.isLatest).ToList();
+            data = data.OrderByDescending(o => o.addDate).ToList();
             var marketGroup = data.GroupBy(o => o.marketId);
             foreach (var g in marketGroup)
             {
@@ -130,7 +114,7 @@ namespace Service
                 vm.HPrice = productPrice.high;
                 vm.ProductId = productPrice.productId;
                 vm.MarketID = productPrice.marketId;
-                vm.ProductName = CacheService.GetProductNameById(productPrice.productId);
+                vm.ProductName = productPrice.productName;
                 list.Add(g.Key, vm);
             }
 
