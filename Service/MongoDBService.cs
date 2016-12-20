@@ -155,6 +155,8 @@ namespace Service
         public string average { get; set; }
         public string change { get; set; }
         public DateTime addDate { get; set; }
+        public string productName { get; set; }
+        public string marketName { get; set; }
         public bool isLatest { get; set; }
     }
 }
